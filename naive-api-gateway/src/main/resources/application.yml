@@ -1,0 +1,39 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: api-gateway
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin地址
+    discovery-client-enabled: false  #不用开启服务发现
+  sleuth:
+    sampler:
+      probability: 1.0 #采样百分比,默认为0.1，即10%，这里配置1，是记录全部的sleuth信息
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+    gateway:
+      routes: #数组形式
+        - id: naive-user  #路由唯一标识
+          uri: lb://naive-user  # 从nacos获取名称转发,lb是负载均衡轮询策略
+          order: 1 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发
+            - Path=/naive-user/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀
+
+        - id: naive-question  #路由唯一标识
+          uri: lb://naive-question  # 从nacos获取名称转发,lb是负载均衡轮询策略
+          order: 1 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发
+            - Path=/naive-question/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀
+
+      discovery:
+        locator:
+          enabled: true  #开启网关拉取nacos的服务

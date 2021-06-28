@@ -1,0 +1,33 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: naive-question
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin地址
+    discovery-client-enabled: false  #不用开启服务发现
+  sleuth:
+    sampler:
+      probability: 1.0 #采样百分比,默认为0.1，即10%，这里配置1，是记录全部的sleuth信息
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2zek1x5h9g063oda1yo.mysql.rds.aliyuncs.com:3306/problem?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: Aliyun00
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 9999
+
+# 控制台输出sql、下划线转驼峰
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
