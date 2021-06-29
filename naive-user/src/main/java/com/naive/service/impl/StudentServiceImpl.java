@@ -15,25 +15,36 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
+    /**
+     * find student via id
+     * */
     @Override
     public Student findById(int stuId) {
         return studentMapper.selectById(stuId);
     }
 
+    /**
+     * update student via id
+     * */
     @Override
     public int updateById(Student student) {
         return studentMapper.updateById(student);
     }
 
+    /**
+     * add student via id
+     * */
     @Override
     public int add(Student student) {
         return studentMapper.insert(student);
     }
 
+    /**
+     * delete student via id
+     * */
     @Override
     public int deleteById(int stuId) {
         return studentMapper.deleteById(stuId);
     }
-
 
 }

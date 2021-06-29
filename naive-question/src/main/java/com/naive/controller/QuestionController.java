@@ -1,10 +1,9 @@
 package com.naive.controller;
 
+import com.naive.domain.Problem;
 import com.naive.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YechenGu
@@ -21,5 +20,29 @@ public class QuestionController {
         return questionService.findById(proId);
     }
 
-    // TODO: add,delete,update
+    /**
+     * add problem via id
+     * */
+    @PostMapping("add")
+    public int add(@RequestBody Problem problem){
+        System.out.println(problem.toString());
+        return questionService.add(problem);
+    }
+
+    /**
+     * update problem via id
+     * */
+    @PostMapping("update_by_id")
+    public int updateById(@RequestBody Problem problem){
+        System.out.println(problem.toString());
+        return questionService.updateById(problem);
+    }
+
+    /**
+     * delete problem via id
+     * */
+    @RequestMapping("delete_by_id")
+    public int deleteById(@RequestParam("proId") int proId){
+        return questionService.deleteById(proId);
+    }
 }

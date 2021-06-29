@@ -1,10 +1,10 @@
 package com.naive.controller;
 
+import com.naive.domain.Admin;
+import com.naive.domain.Student;
 import com.naive.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YechenGu
@@ -16,10 +16,37 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * find admin via id
+     * */
     @RequestMapping("find_by_id")
     public Object findById(@RequestParam("adId") int adId){
         return adminService.findById(adId);
     }
 
-    // TODO: add,delete,update
+    /**
+     * add admin via id
+     * */
+    @PostMapping("add")
+    public int add(@RequestBody Admin admin){
+        System.out.println(admin.toString());
+        return adminService.add(admin);
+    }
+
+    /**
+     * update admin via id
+     * */
+    @PostMapping("update_by_id")
+    public int updateById(@RequestBody Admin admin){
+        System.out.println(admin.toString());
+        return adminService.updateById(admin);
+    }
+
+    /**
+     * delete admin via id
+     * */
+    @RequestMapping("delete_by_id")
+    public int deleteById(@RequestParam("adId") int adId){
+        return adminService.deleteById(adId);
+    }
 }
