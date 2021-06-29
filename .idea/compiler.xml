@@ -10,6 +10,7 @@
         <module name="naive-api-gateway" />
         <module name="naive-user" />
         <module name="naive-question" />
+        <module name="naive-test" />
         <module name="naive-common" />
       </profile>
     </annotationProcessing>

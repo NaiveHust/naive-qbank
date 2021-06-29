@@ -1,10 +1,16 @@
 package com.naive.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.QuestionMapper;
 import com.naive.domain.Problem;
 import com.naive.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author YechenGu
@@ -33,5 +39,32 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public int deleteById(int proId) {
         return questionMapper.deleteById(proId);
+    }
+
+    @Override
+    public List<Problem> findByCha(String chapter,int index,int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_cha",chapter);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        return iPage.getRecords();
+    }
+
+    @Override
+    public List<Problem> findByKeyw(String keyword,int index,int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_keyw",keyword);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        return iPage.getRecords();
+    }
+
+    @Override
+    public List<Problem> findByDif(String difficulty,int index,int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_dif",difficulty);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        return iPage.getRecords();
     }
 }

@@ -1,17 +1,17 @@
 package com.naive.service;
 
-import com.naive.domain.Test;
+import com.naive.domain.Paper;
 
 /**
  * @author YechenGu
  * @date 2021/6/28 4:26 下午
  */
 public interface PaperService {
-    Test findById(int testId);
+    Paper findById(int paperId);
 
-    int updateById(Test test);
+    int updateById(Paper paper);
 
-    int add(Test test);
+    int add(Paper paper);
 
-    int deleteById(int stuId);
+    int deleteById(int paperId);
 }

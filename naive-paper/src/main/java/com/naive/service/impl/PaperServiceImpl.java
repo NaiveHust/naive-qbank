@@ -1,7 +1,7 @@
 package com.naive.service.impl;
 
 import com.naive.dao.PaperMapper;
-import com.naive.domain.Test;
+import com.naive.domain.Paper;
 import com.naive.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,22 +16,22 @@ public class PaperServiceImpl implements PaperService {
     private PaperMapper paperMapper;
 
     @Override
-    public Test findById(int testId) {
+    public Paper findById(int paperId) {
         return null;
     }
 
     @Override
-    public int updateById(Test test) {
+    public int updateById(Paper paper) {
         return 0;
     }
 
     @Override
-    public int add(Test test) {
+    public int add(Paper paper) {
         return 0;
     }
 
     @Override
-    public int deleteById(int stuId) {
+    public int deleteById(int paperId) {
         return 0;
     }
 }
