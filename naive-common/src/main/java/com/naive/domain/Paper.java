@@ -3,7 +3,6 @@ package com.naive.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
-import java.util.Date;
 
 /**
  * @author YechenGu
@@ -13,10 +12,12 @@ public class Paper {
     @TableId(type = IdType.AUTO)
     private int paperNo;
     private String paperName;
-    private Date paperTime;
+    private int paperTime;
     private String paperType;
     private String paperDif;
     private int paperScore;
+    private int paperClass;
+    private String paperInfo;
 
     public int getPaperNo() {
         return paperNo;
@@ -34,11 +35,11 @@ public class Paper {
         this.paperName = paperName;
     }
 
-    public Date getPaperTime() {
+    public int getPaperTime() {
         return paperTime;
     }
 
-    public void setPaperTime(Date paperTime) {
+    public void setPaperTime(int paperTime) {
         this.paperTime = paperTime;
     }
 
@@ -58,12 +59,28 @@ public class Paper {
         this.paperDif = paperDif;
     }
 
+    public int getPaperClass() {
+        return paperClass;
+    }
+
+    public void setPaperClass(int paperClass) {
+        this.paperClass = paperClass;
+    }
+
     public int getPaperScore() {
         return paperScore;
     }
 
     public void setPaperScore(int paperScore) {
         this.paperScore = paperScore;
+    }
+
+    public String getPaperInfo() {
+        return paperInfo;
+    }
+
+    public void setPaperInfo(String paperInfo) {
+        this.paperInfo = paperInfo;
     }
 
     @Override
@@ -75,6 +92,8 @@ public class Paper {
                 ", paperType='" + paperType + '\'' +
                 ", paperDif='" + paperDif + '\'' +
                 ", paperScore=" + paperScore +
+                ", paperClass=" + paperClass +
+                ", paperInfo='" + paperInfo + '\'' +
                 '}';
     }
 }

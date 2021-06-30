@@ -17,6 +17,7 @@ public class Problem {
     private String proType;
     private String proAns;
     private String proCha;
+    private int proClass;
 
     public int getProNo() {
         return proNo;
@@ -74,6 +75,14 @@ public class Problem {
         this.proCha = proCha;
     }
 
+    public int getProClass() {
+        return proClass;
+    }
+
+    public void setProClass(int proClass) {
+        this.proClass = proClass;
+    }
+
     @Override
     public String toString() {
         return "Problem{" +
@@ -84,6 +93,7 @@ public class Problem {
                 ", proType='" + proType + '\'' +
                 ", proAns='" + proAns + '\'' +
                 ", proCha='" + proCha + '\'' +
+                ", proTea=" + proClass +
                 '}';
     }
 }

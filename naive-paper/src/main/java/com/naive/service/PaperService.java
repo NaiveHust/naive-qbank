@@ -9,17 +9,11 @@ import java.util.List;
  * @date 2021/6/28 4:26 下午
  */
 public interface PaperService {
-    Paper findBaicInfo(int paperId);
+    Paper findById(int paperId);
 
-    int updateBasicInfo(Paper paper);
+    int updateById(Paper paper);
 
-    int addBasic(Paper paper);
+    int add(Paper paper);
 
     int deleteById(int paperId);
-
-    List<Integer> findQuestions(int paperId);
-
-    int addQuestion(int paperId,int proId);
-
-    int deleteQuestion(int paperId,int proId);
 }

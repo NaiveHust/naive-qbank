@@ -18,39 +18,23 @@ public class PaperServiceImpl implements PaperService {
     private PaperMapper paperMapper;
 
     @Override
-    public Paper findBaicInfo(int paperId) {
+    public Paper findById(int paperId) {
         return paperMapper.selectById(paperId);
     }
 
     @Override
-    public int updateBasicInfo(Paper paper) {
+    public int updateById(Paper paper) {
         return paperMapper.updateById(paper);
     }
 
     @Override
-    public int addBasic(Paper paper) {
+    public int add(Paper paper) {
         return paperMapper.insert(paper);
     }
 
     @Override
     public int deleteById(int paperId) {
-        int paperRes = paperMapper.deleteById(paperId);
-        int relationRes = paperMapper.deleteQuestions(paperId);
-        return paperRes & relationRes;
+        return paperMapper.deleteById(paperId);
     }
 
-    @Override
-    public List<Integer> findQuestions(int paperId) {
-        return paperMapper.findQuestions(paperId);
-    }
-
-    @Override
-    public int addQuestion(int paperId, int proId) {
-        return paperMapper.addQuestion(paperId,proId);
-    }
-
-    @Override
-    public int deleteQuestion(int paperId, int proId) {
-        return paperMapper.deleteQuestion(paperId,proId);
-    }
 }
