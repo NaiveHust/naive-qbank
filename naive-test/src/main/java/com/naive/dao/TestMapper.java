@@ -1,15 +1,13 @@
 package com.naive.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.naive.domain.Paper;
+import com.naive.domain.Test;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author YechenGu
- * @date 2021/6/28 4:25 下午
+ * @date 2021/6/30 5:10 下午
  */
 @Repository
-public interface PaperMapper extends BaseMapper<Paper> {
+public interface TestMapper extends BaseMapper<Test> {
 }

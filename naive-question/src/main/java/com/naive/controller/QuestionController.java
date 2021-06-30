@@ -29,7 +29,7 @@ public class QuestionController {
     /**
      * add problem via id
      * */
-    @ApiOperation("添加试题")
+    @ApiOperation("老师添加试题")
     @PostMapping("add")
     public int add(@RequestBody Problem problem){
         System.out.println(problem.toString());
