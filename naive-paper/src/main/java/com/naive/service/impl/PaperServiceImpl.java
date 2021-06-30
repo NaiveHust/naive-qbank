@@ -6,6 +6,8 @@ import com.naive.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YechenGu
  * @date 2021/6/28 4:28 下午
@@ -16,22 +18,39 @@ public class PaperServiceImpl implements PaperService {
     private PaperMapper paperMapper;
 
     @Override
-    public Paper findById(int paperId) {
-        return null;
+    public Paper findBaicInfo(int paperId) {
+        return paperMapper.selectById(paperId);
     }
 
     @Override
-    public int updateById(Paper paper) {
-        return 0;
+    public int updateBasicInfo(Paper paper) {
+        return paperMapper.updateById(paper);
     }
 
     @Override
-    public int add(Paper paper) {
-        return 0;
+    public int addBasic(Paper paper) {
+        return paperMapper.insert(paper);
     }
 
     @Override
     public int deleteById(int paperId) {
-        return 0;
+        int paperRes = paperMapper.deleteById(paperId);
+        int relationRes = paperMapper.deleteQuestions(paperId);
+        return paperRes & relationRes;
+    }
+
+    @Override
+    public List<Integer> findQuestions(int paperId) {
+        return paperMapper.findQuestions(paperId);
+    }
+
+    @Override
+    public int addQuestion(int paperId, int proId) {
+        return paperMapper.addQuestion(paperId,proId);
+    }
+
+    @Override
+    public int deleteQuestion(int paperId, int proId) {
+        return paperMapper.deleteQuestion(paperId,proId);
     }
 }

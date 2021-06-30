@@ -31,3 +31,10 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+#swagger相关
+swagger:
+  title: 用户服务
+  contact:
+    name: YechenGu
+    email: 1159480285@qq.com
