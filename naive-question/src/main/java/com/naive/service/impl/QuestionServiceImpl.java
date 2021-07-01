@@ -67,4 +67,13 @@ public class QuestionServiceImpl implements QuestionService {
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         return iPage.getRecords();
     }
+
+    @Override
+    public List<Problem> findByCla(int classNo, int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_class",classNo);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        return iPage.getRecords();
+    }
 }

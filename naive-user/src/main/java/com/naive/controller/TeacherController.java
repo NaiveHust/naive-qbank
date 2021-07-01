@@ -1,6 +1,5 @@
 package com.naive.controller;
 
-
 import com.naive.domain.Teacher;
 import com.naive.service.TeacherService;
 import io.swagger.annotations.Api;
@@ -56,4 +55,5 @@ public class TeacherController {
     public int deleteById(@PathVariable("teaId") int teaId){
         return teacherService.deleteById(teaId);
     }
+
 }
