@@ -2,6 +2,7 @@ package com.naive.controller;
 
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
+import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,25 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private RedisUtils redisUtils;
+
     /**
      * find student via id
      * */
     @ApiOperation("根据id查询学生")
     @GetMapping("find_by_id/{stuId}")
     public Object findById(@PathVariable("stuId") int stuId){
-        return studentService.findById(stuId);
+        if (redisUtils.exists("stuId"+stuId)){
+            Object student = redisUtils.get("stuId"+stuId);
+            System.out.println("find from cache \n"+student.toString());
+            return student;
+        }else {
+            System.out.println("find from database");
+            Object student = studentService.findById(stuId);
+            redisUtils.set("stuId"+stuId,student);
+            return student;
+        }
     }
 
     /**
@@ -33,7 +46,6 @@ public class StudentController {
     @ApiOperation("添加学生")
     @PostMapping("add")
     public int add(@RequestBody Student student){
-        System.out.println(student.toString());
         return studentService.add(student);
     }
 
@@ -43,7 +55,7 @@ public class StudentController {
     @ApiOperation("根据id更新学生")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Student student){
-        System.out.println(student.toString());
+        redisUtils.remove("stuId"+student.getStuNo());
         return studentService.updateById(student);
     }
 
@@ -53,6 +65,19 @@ public class StudentController {
     @ApiOperation("根据id删除学生")
     @GetMapping("delete_by_id/{stu_id}")
     public int deleteById(@PathVariable("stuId") int stuId){
+        redisUtils.remove("stuId"+stuId);
         return studentService.deleteById(stuId);
+    }
+
+    /**
+     *
+     * @param id
+     * @param pwd
+     * @return
+     */
+    @ApiOperation("学生登录校验")
+    @GetMapping("check/{id}/{pwd}")
+    public Object checkPwd(@PathVariable("id") int id, @PathVariable("pwd") String pwd){
+        return studentService.checkPwd(id,pwd);
     }
 }

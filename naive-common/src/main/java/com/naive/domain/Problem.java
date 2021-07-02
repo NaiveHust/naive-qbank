@@ -17,7 +17,7 @@ public class Problem {
     private String proType;
     private String proAns;
     private String proCha;
-    private int proClass;
+    private Integer proClass;
 
     public int getProNo() {
         return proNo;
@@ -75,11 +75,11 @@ public class Problem {
         this.proCha = proCha;
     }
 
-    public int getProClass() {
+    public Integer getProClass() {
         return proClass;
     }
 
-    public void setProClass(int proClass) {
+    public void setProClass(Integer proClass) {
         this.proClass = proClass;
     }
 

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.naive.domain.Paper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 /**
  * @author YechenGu

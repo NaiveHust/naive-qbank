@@ -26,6 +26,12 @@ spring:
         dashboard: 127.0.0.1:8080
         port: 9999
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 30000
+
 # 控制台输出sql、下划线转驼峰
 mybatis-plus:
   configuration:
@@ -38,3 +44,4 @@ swagger:
   contact:
     name: YechenGu
     email: 1159480285@qq.com
+

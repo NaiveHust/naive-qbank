@@ -12,11 +12,11 @@ public class Paper {
     @TableId(type = IdType.AUTO)
     private int paperNo;
     private String paperName;
-    private int paperTime;
+    private Integer paperTime;
     private String paperType;
     private String paperDif;
-    private int paperScore;
-    private int paperClass;
+    private Integer paperScore;
+    private Integer paperClass;
     private String paperInfo;
 
     public int getPaperNo() {
@@ -35,11 +35,11 @@ public class Paper {
         this.paperName = paperName;
     }
 
-    public int getPaperTime() {
+    public Integer getPaperTime() {
         return paperTime;
     }
 
-    public void setPaperTime(int paperTime) {
+    public void setPaperTime(Integer paperTime) {
         this.paperTime = paperTime;
     }
 
@@ -59,20 +59,20 @@ public class Paper {
         this.paperDif = paperDif;
     }
 
-    public int getPaperClass() {
-        return paperClass;
-    }
-
-    public void setPaperClass(int paperClass) {
-        this.paperClass = paperClass;
-    }
-
-    public int getPaperScore() {
+    public Integer getPaperScore() {
         return paperScore;
     }
 
-    public void setPaperScore(int paperScore) {
+    public void setPaperScore(Integer paperScore) {
         this.paperScore = paperScore;
+    }
+
+    public Integer getPaperClass() {
+        return paperClass;
+    }
+
+    public void setPaperClass(Integer paperClass) {
+        this.paperClass = paperClass;
     }
 
     public String getPaperInfo() {

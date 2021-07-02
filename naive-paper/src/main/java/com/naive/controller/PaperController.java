@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @author YechenGu
  * @date 2021/6/28 4:30 下午
  */
-@Api("试卷管理")
+@Api(tags = "试卷管理")
 @RestController
 @RequestMapping("api/v1/paper")
 public class PaperController {
@@ -19,8 +19,8 @@ public class PaperController {
     private PaperService paperService;
 
     @ApiOperation(value = "显示试卷",notes = "学生选择某张试卷,向后台传该试卷的id,根据前端传来的试卷id查询试卷信息表,得到json格式,并将该列表返回给前端,前端渲染")
-    @GetMapping("find_basicInfo/{paperId}")
-    public Paper findBasicInfo(@PathVariable("paperId") int paperId){
+    @GetMapping("find_paper/{paperId}")
+    public Paper findPaper(@PathVariable("paperId") int paperId){
         return paperService.findById(paperId);
     }
 

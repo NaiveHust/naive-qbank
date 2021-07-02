@@ -22,4 +22,6 @@ public interface QuestionService {
     List<Problem> findByKeyw(String keyword,int index,int size);
 
     List<Problem> findByDif(String difficulty,int index,int size);
+
+    List<Problem> findByCla(int classNo,int index,int size);
 }

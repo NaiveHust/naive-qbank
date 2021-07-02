@@ -1,5 +1,6 @@
 package com.naive.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.naive.dao.TeacherMapper;
 import com.naive.domain.Teacher;
 import com.naive.service.TeacherService;
@@ -33,5 +34,13 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int deleteById(int teaId) {
         return teacherMapper.deleteById(teaId);
+    }
+
+    @Override
+    public Teacher checkPwd(int id, String pwd) {
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.eq("tea_no",id);
+        teacherQueryWrapper.eq("tea_pwd",pwd);
+        return teacherMapper.selectOne(teacherQueryWrapper);
     }
 }

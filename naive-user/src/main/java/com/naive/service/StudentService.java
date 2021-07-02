@@ -14,4 +14,6 @@ public interface StudentService {
     int add(Student student);
 
     int deleteById(int stuId);
+
+    Student checkPwd(int id,String pwd);
 }
