@@ -14,4 +14,6 @@ public interface TeacherService {
     int add(Teacher teacher);
 
     int deleteById(int teaId);
+
+    Teacher checkPwd(int id, String pwd);
 }

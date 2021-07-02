@@ -1,5 +1,6 @@
 package com.naive.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.naive.dao.StudentMapper;
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
@@ -45,6 +46,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int deleteById(int stuId) {
         return studentMapper.deleteById(stuId);
+    }
+
+    /**
+     *
+     * @param id
+     * @param pwd
+     * @return
+     */
+    @Override
+    public Student checkPwd(int id, String pwd) {
+        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.eq("stu_no",id);
+        studentQueryWrapper.eq("stu_pwd",pwd);
+        return studentMapper.selectOne(studentQueryWrapper);
     }
 
 }
