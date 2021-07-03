@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.naive.dao.TestMapper;
 import com.naive.domain.Test;
 import com.naive.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestServiceImpl implements TestService {
+    @Autowired
     private TestMapper testMapper;
 
     @Override
@@ -30,5 +32,12 @@ public class TestServiceImpl implements TestService {
     @Override
     public int update(Test test) {
         return testMapper.updateById(test);
+    }
+
+    @Override
+    public int deleteByStu(int stuId) {
+        QueryWrapper<Test> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("stu_no",stuId);
+        return testMapper.delete(queryWrapper);
     }
 }

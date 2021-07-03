@@ -12,4 +12,6 @@ public interface TestService {
     Test findStuAnswer(int stuNo,int paperNo);
 
     int update(Test test);
+
+    int deleteByStu(int stuId);
 }

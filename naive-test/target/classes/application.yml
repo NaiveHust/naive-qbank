@@ -26,6 +26,13 @@ spring:
         dashboard: 127.0.0.1:8080
         port: 9999
 
+  rabbitmq:
+    host: 123.57.215.118
+    port: 5672
+    virtual-host: /dev
+    username: admin
+    password: password
+
 # 控制台输出sql、下划线转驼峰
 mybatis-plus:
   configuration:

@@ -1,10 +1,12 @@
 package com.naive.controller;
 
+import com.naive.config.RabbitMQConfig;
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
 import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,9 @@ public class StudentController {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * find student via id
@@ -63,9 +68,11 @@ public class StudentController {
      * delete student via id
      * */
     @ApiOperation("根据id删除学生")
-    @GetMapping("delete_by_id/{stu_id}")
+    @GetMapping("delete_by_id/{stuId}")
     public int deleteById(@PathVariable("stuId") int stuId){
         redisUtils.remove("stuId"+stuId);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.ITEM_TOPIC_EXCHANGE,"stu.delete",String.valueOf(stuId));
+        System.out.println("send message: "+String.valueOf(stuId));
         return studentService.deleteById(stuId);
     }
 
