@@ -14,4 +14,8 @@ public interface ClassService {
     List<Class> findByTea(int teaId);
 
     List<Class> findByStu(int stuId);
+
+    List<Integer> findStu(int classId);
+
+    List<Integer> findTea(int classId);
 }

@@ -7,6 +7,7 @@ import com.naive.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,5 +36,29 @@ public class ClassServiceImpl implements ClassService {
         QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("stu_no",stuId);
         return classMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<Integer> findStu(int classId) {
+        QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("class_no",classId);
+        List<Class> list = classMapper.selectList(queryWrapper);
+        List<Integer> list1 = new ArrayList<>();
+        for (Class c:list){
+            list1.add(c.getStuNo());
+        }
+        return list1;
+    }
+
+    @Override
+    public List<Integer> findTea(int classId) {
+        QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("class_no",classId);
+        List<Class> list = classMapper.selectList(queryWrapper);
+        List<Integer> list1 = new ArrayList<>();
+        for (Class c:list){
+            list1.add(c.getTeaNo());
+        }
+        return list1;
     }
 }

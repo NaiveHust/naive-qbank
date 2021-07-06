@@ -2,6 +2,7 @@ package com.naive.controller;
 
 import com.naive.config.RabbitMQConfig;
 import com.naive.domain.Student;
+import com.naive.service.ClassService;
 import com.naive.service.StudentService;
 import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
@@ -9,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author YechenGu
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private ClassService classService;
 
     @Autowired
     private RedisUtils redisUtils;
@@ -86,5 +92,17 @@ public class StudentController {
     @GetMapping("check/{id}/{pwd}")
     public Object checkPwd(@PathVariable("id") int id, @PathVariable("pwd") String pwd){
         return studentService.checkPwd(id,pwd);
+    }
+
+    /**
+     *
+     * @param classId
+     * @return
+     */
+    @ApiOperation("根据课程号查找学生")
+    @GetMapping("find_by_class/{classId}")
+    public List<Student> selectStuFromCla(@PathVariable("classId") int classId){
+        List<Integer> ids = classService.findStu(classId);
+        return studentService.selectStuFromCla(ids);
     }
 }

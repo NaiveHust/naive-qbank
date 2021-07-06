@@ -7,6 +7,8 @@ import com.naive.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YechenGu
  * @date 2021/6/28 3:12 下午
@@ -42,5 +44,10 @@ public class TeacherServiceImpl implements TeacherService {
         teacherQueryWrapper.eq("tea_no",id);
         teacherQueryWrapper.eq("tea_pwd",pwd);
         return teacherMapper.selectOne(teacherQueryWrapper);
+    }
+
+    @Override
+    public List<Teacher> selectTeaFromCla(List<Integer> ids) {
+        return teacherMapper.selectBatchIds(ids);
     }
 }

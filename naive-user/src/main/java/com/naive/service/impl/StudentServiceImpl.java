@@ -7,6 +7,8 @@ import com.naive.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YechenGu
  * @date 2021/6/28 10:50 上午
@@ -60,6 +62,11 @@ public class StudentServiceImpl implements StudentService {
         studentQueryWrapper.eq("stu_no",id);
         studentQueryWrapper.eq("stu_pwd",pwd);
         return studentMapper.selectOne(studentQueryWrapper);
+    }
+
+    @Override
+    public List<Student> selectStuFromCla(List<Integer> ids) {
+        return studentMapper.selectBatchIds(ids);
     }
 
 }

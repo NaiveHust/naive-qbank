@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @date 2021/6/30 5:04 下午
  */
 public class Class {
-    @TableId(type = IdType.AUTO)
     private int classNo;
     private String className;
     private Integer stuNo;
