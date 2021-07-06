@@ -25,13 +25,13 @@ public class ClassController {
     }
 
     @ApiOperation("根据教师id查询课程")
-    @GetMapping("find_class/{teaId}")
+    @GetMapping("tea_class/{teaId}")
     public Object findClaByTea(@PathVariable("teaId") int teaId){
         return classService.findByTea(teaId);
     }
 
     @ApiOperation("根据学生id查询课程")
-    @GetMapping("find_class/{stuId}")
+    @GetMapping("stu_class/{stuId}")
     public Object findClaByStu(@PathVariable("stuId") int stuId){
         return classService.findByStu(stuId);
     }
