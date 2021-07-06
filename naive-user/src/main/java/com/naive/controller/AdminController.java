@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "管理员管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/admin")
 public class AdminController {
     @Autowired
@@ -55,7 +56,7 @@ public class AdminController {
     @ApiOperation("根据id更新管理员")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Admin admin){
-        redisUtils.remove("adId"+admin.getAdNo());
+        redisUtils.remove("adId"+admin.getId());
         return adminService.updateById(admin);
     }
 

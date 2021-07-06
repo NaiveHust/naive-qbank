@@ -41,8 +41,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher checkPwd(int id, String pwd) {
         QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
-        teacherQueryWrapper.eq("tea_no",id);
-        teacherQueryWrapper.eq("tea_pwd",pwd);
+        teacherQueryWrapper.eq("id",id);
+        teacherQueryWrapper.eq("pwd",pwd);
         return teacherMapper.selectOne(teacherQueryWrapper);
     }
 

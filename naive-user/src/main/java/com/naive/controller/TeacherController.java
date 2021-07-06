@@ -1,6 +1,5 @@
 package com.naive.controller;
 
-import com.naive.domain.Student;
 import com.naive.domain.Teacher;
 import com.naive.service.ClassService;
 import com.naive.service.TeacherService;
@@ -18,6 +17,7 @@ import java.util.List;
  */
 @Api(tags = "教师管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/teacher")
 public class TeacherController {
     @Autowired
@@ -62,7 +62,7 @@ public class TeacherController {
     @ApiOperation("根据id更新教师")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Teacher teacher){
-        redisUtils.remove("teaId"+teacher.getTeaNo());
+        redisUtils.remove("teaId"+teacher.getId());
         return teacherService.updateById(teacher);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "课程管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/class")
 public class ClassController {
     @Autowired

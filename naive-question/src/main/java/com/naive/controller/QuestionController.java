@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Api(tags = "试题管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/question")
 public class QuestionController {
     @Autowired

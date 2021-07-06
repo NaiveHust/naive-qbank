@@ -59,8 +59,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student checkPwd(int id, String pwd) {
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.eq("stu_no",id);
-        studentQueryWrapper.eq("stu_pwd",pwd);
+        studentQueryWrapper.eq("id",id);
+        studentQueryWrapper.eq("pwd",pwd);
         return studentMapper.selectOne(studentQueryWrapper);
     }
 

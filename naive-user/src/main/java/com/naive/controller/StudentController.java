@@ -19,6 +19,7 @@ import java.util.List;
  */
 @Api(tags = "学生管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/student")
 public class StudentController {
     @Autowired
@@ -66,7 +67,7 @@ public class StudentController {
     @ApiOperation("根据id更新学生")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Student student){
-        redisUtils.remove("stuId"+student.getStuNo());
+        redisUtils.remove("stuId"+student.getId());
         return studentService.updateById(student);
     }
 

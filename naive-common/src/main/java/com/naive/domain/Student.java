@@ -7,62 +7,31 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @author YechenGu
  * @date 2021/6/28 10:26 上午
  */
-public class Student {
-    @TableId(type = IdType.AUTO)
-    private int stuNo;
-    private String stuName;
-    private String stuPwd;
-    private String stuDiscipline;
-    private String stuGrade;
+public class Student extends User{
+    private String discipline;
+    private String grade;
 
-    public int getStuNo() {
-        return stuNo;
+    public String getDiscipline() {
+        return discipline;
     }
 
-    public void setStuNo(int stuNo) {
-        this.stuNo = stuNo;
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
     }
 
-    public String getStuName() {
-        return stuName;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
-    }
-
-    public String getStuPwd() {
-        return stuPwd;
-    }
-
-    public void setStuPwd(String stuPwd) {
-        this.stuPwd = stuPwd;
-    }
-
-    public String getStuDiscipline() {
-        return stuDiscipline;
-    }
-
-    public void setStuDiscipline(String stuDiscipline) {
-        this.stuDiscipline = stuDiscipline;
-    }
-
-    public String getStuGrade() {
-        return stuGrade;
-    }
-
-    public void setStuGrade(String stuGrade) {
-        this.stuGrade = stuGrade;
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "stuNo=" + stuNo +
-                ", stuName='" + stuName + '\'' +
-                ", stuPwd='" + stuPwd + '\'' +
-                ", stuDiscipline='" + stuDiscipline + '\'' +
-                ", stuGrade='" + stuGrade + '\'' +
+                "discipline='" + discipline + '\'' +
+                ", grade='" + grade + '\'' +
                 '}';
     }
 }

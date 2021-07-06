@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "试卷管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/paper")
 public class PaperController {
     @Autowired
