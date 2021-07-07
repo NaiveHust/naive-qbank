@@ -1,7 +1,7 @@
 package com.naive.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.naive.domain.Class;
+import com.naive.domain.Relation;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @date 2021/7/7 11:32 上午
  */
 @Repository
-public interface ClassMapper extends BaseMapper<Class> {
+public interface RelationMapper extends BaseMapper<Relation> {
 }

@@ -1,11 +1,14 @@
 package com.naive.controller;
 
 import com.naive.domain.Paper;
+import com.naive.domain.Problem;
 import com.naive.service.PaperService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author YechenGu
@@ -19,26 +22,77 @@ public class PaperController {
     @Autowired
     private PaperService paperService;
 
+    /**
+     *
+     * @param paperId
+     * @return
+     */
     @ApiOperation(value = "显示试卷",notes = "学生选择某张试卷,向后台传该试卷的id,根据前端传来的试卷id查询试卷信息表,得到json格式,并将该列表返回给前端,前端渲染")
     @GetMapping("find_paper/{paperId}")
     public Paper findPaper(@PathVariable("paperId") int paperId){
         return paperService.findById(paperId);
     }
 
+    /**
+     *
+     * @param paper
+     * @return
+     */
     @ApiOperation(value = "老师创建试卷")
     @PostMapping("add")
     public int addPaper(@RequestBody Paper paper){
         return paperService.add(paper);
     }
 
+    /**
+     *
+     * @param paper
+     * @return
+     */
     @ApiOperation(value = "老师更新试卷信息")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Paper paper){
         return paperService.updateById(paper);
     }
 
+    /**
+     *
+     * @param paperId
+     * @return
+     */
     @ApiOperation(value = "老师删除试卷")
     public int deleteById(@PathVariable("paperId") int paperId){
         return paperService.deleteById(paperId);
     }
+
+    /**
+     *
+     * @param paperClass
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("根据课程分页寻找试卷")
+    @GetMapping("findByCla/{paperClass}/{index}/{size}")
+    public List<Paper> findByCla(@PathVariable("paperClass") String paperClass,
+                                   @PathVariable("index") int index,
+                                   @PathVariable("size") int size){
+        return paperService.findByCla(paperClass,index,size);
+    }
+
+    /**
+     *
+     * @param paperTea
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("根据教师分页寻找试卷")
+    @GetMapping("findByCla/{paperTea}/{index}/{size}")
+    public List<Paper> findByTea(@PathVariable("paperTea") int paperTea,
+                                   @PathVariable("index") int index,
+                                   @PathVariable("size") int size){
+        return paperService.findByTea(paperTea,index,size);
+    }
+
 }

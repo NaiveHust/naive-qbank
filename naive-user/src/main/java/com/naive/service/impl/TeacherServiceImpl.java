@@ -46,8 +46,4 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.selectOne(teacherQueryWrapper);
     }
 
-    @Override
-    public List<Teacher> selectTeaFromCla(List<Integer> ids) {
-        return teacherMapper.selectBatchIds(ids);
-    }
 }

@@ -16,7 +16,8 @@ public class Paper {
     private String paperType;
     private String paperDif;
     private Integer paperScore;
-    private Integer paperClass;
+    private Integer paperTea;
+    private String paperClass;
     private String paperInfo;
 
     public int getPaperNo() {
@@ -67,11 +68,19 @@ public class Paper {
         this.paperScore = paperScore;
     }
 
-    public Integer getPaperClass() {
+    public Integer getPaperTea() {
+        return paperTea;
+    }
+
+    public void setPaperTea(Integer paperTea) {
+        this.paperTea = paperTea;
+    }
+
+    public String getPaperClass() {
         return paperClass;
     }
 
-    public void setPaperClass(Integer paperClass) {
+    public void setPaperClass(String paperClass) {
         this.paperClass = paperClass;
     }
 
@@ -92,7 +101,8 @@ public class Paper {
                 ", paperType='" + paperType + '\'' +
                 ", paperDif='" + paperDif + '\'' +
                 ", paperScore=" + paperScore +
-                ", paperClass=" + paperClass +
+                ", paperTea=" + paperTea +
+                ", paperClass='" + paperClass + '\'' +
                 ", paperInfo='" + paperInfo + '\'' +
                 '}';
     }

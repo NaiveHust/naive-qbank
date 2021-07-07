@@ -18,6 +18,4 @@ public interface TeacherService {
     int deleteById(int teaId);
 
     Teacher checkPwd(int id, String pwd);
-
-    List<Teacher> selectTeaFromCla(List<Integer> ids);
 }

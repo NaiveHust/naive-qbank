@@ -19,9 +19,11 @@ public interface QuestionService {
 
     List<Problem> findByCha(String chapter,int index,int size);
 
-    List<Problem> findByKeyw(String keyword,int index,int size);
+    List<Problem> findBySimple(String simple,int index,int size);
 
     List<Problem> findByDif(String difficulty,int index,int size);
 
-    List<Problem> findByCla(int classNo,int index,int size);
+    List<Problem> findByCla(String c,int index,int size);
+
+    List<Problem> findByTea(int tid,int index,int size);
 }

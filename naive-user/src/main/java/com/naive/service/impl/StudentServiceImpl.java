@@ -64,9 +64,4 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.selectOne(studentQueryWrapper);
     }
 
-    @Override
-    public List<Student> selectStuFromCla(List<Integer> ids) {
-        return studentMapper.selectBatchIds(ids);
-    }
-
 }

@@ -73,17 +73,17 @@ public class QuestionController {
 
     /**
      *
-     * @param keyword
+     * @param simple
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据关键词分页寻找试题")
-    @GetMapping("findByKeyw/{keyword}/{index}/{size}")
-    public List<Problem> findByKeyw(@PathVariable("keyword") String keyword,
+    @ApiOperation("根据题目简称分页寻找试题")
+    @GetMapping("findByKeyw/{simple}/{index}/{size}")
+    public List<Problem> findBySimple(@PathVariable("simple") String simple,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByKeyw(keyword,index,size);
+        return questionService.findBySimple(simple,index,size);
     }
 
     /**
@@ -110,9 +110,24 @@ public class QuestionController {
      */
     @ApiOperation("根据课程分页寻找试题")
     @GetMapping("findByCla/{proClass}/{index}/{size}")
-    public List<Problem> findByCla(@PathVariable("proClass") int proClass,
+    public List<Problem> findByCla(@PathVariable("proClass") String proClass,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return questionService.findByCla(proClass,index,size);
+    }
+
+    /**
+     *
+     * @param proTea
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("根据教师分页寻找试题")
+    @GetMapping("findByCla/{proTea}/{index}/{size}")
+    public List<Problem> findByTea(@PathVariable("proTea") int proTea,
+                                   @PathVariable("index") int index,
+                                   @PathVariable("size") int size){
+        return questionService.findByTea(proTea,index,size);
     }
 }

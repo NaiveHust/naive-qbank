@@ -12,12 +12,13 @@ public class Problem {
     @TableId(type = IdType.AUTO)
     private int proNo;
     private String proDetail;
-    private String proKeyw;
+    private String proSimple;
     private String proDif;
     private String proType;
     private String proAns;
     private String proCha;
-    private Integer proClass;
+    private Integer proTea;
+    private String proClass;
 
     public int getProNo() {
         return proNo;
@@ -35,12 +36,12 @@ public class Problem {
         this.proDetail = proDetail;
     }
 
-    public String getProKeyw() {
-        return proKeyw;
+    public String getProSimple() {
+        return proSimple;
     }
 
-    public void setProKeyw(String proKeyw) {
-        this.proKeyw = proKeyw;
+    public void setProSimple(String proSimple) {
+        this.proSimple = proSimple;
     }
 
     public String getProDif() {
@@ -75,12 +76,20 @@ public class Problem {
         this.proCha = proCha;
     }
 
-    public Integer getProClass() {
-        return proClass;
+    public Integer getProTea() {
+        return proTea;
     }
 
-    public void setProClass(Integer proClass) {
+    public void setProTea(Integer proTea) {
+        this.proTea = proTea;
+    }
+
+    public void setProClass(String proClass) {
         this.proClass = proClass;
+    }
+
+    public String getProClass() {
+        return proClass;
     }
 
     @Override
@@ -88,12 +97,13 @@ public class Problem {
         return "Problem{" +
                 "proNo=" + proNo +
                 ", proDetail='" + proDetail + '\'' +
-                ", proKeyw='" + proKeyw + '\'' +
+                ", proKeyw='" + proSimple + '\'' +
                 ", proDif='" + proDif + '\'' +
                 ", proType='" + proType + '\'' +
                 ", proAns='" + proAns + '\'' +
                 ", proCha='" + proCha + '\'' +
-                ", proTea=" + proClass +
+                ", proTea=" + proTea +
+                ", proClass='" + proClass + '\'' +
                 '}';
     }
 }

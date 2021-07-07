@@ -16,4 +16,8 @@ public interface PaperService {
     int add(Paper paper);
 
     int deleteById(int paperId);
+
+    List<Paper> findByCla(String c, int index, int size);
+
+    List<Paper> findByTea(int tid,int index,int size);
 }

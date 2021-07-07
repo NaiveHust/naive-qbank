@@ -69,4 +69,16 @@ public class AdminController {
         redisUtils.remove("adId"+adId);
         return adminService.deleteById(adId);
     }
+
+    /**
+     *
+     * @param id
+     * @param pwd
+     * @return
+     */
+    @ApiOperation("管理员登录校验")
+    @GetMapping("check/{id}/{pwd}")
+    public Object checkPwd(@PathVariable("id") int id, @PathVariable("pwd") String pwd){
+        return adminService.checkPwd(id,pwd);
+    }
 }

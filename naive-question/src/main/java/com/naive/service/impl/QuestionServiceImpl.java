@@ -44,16 +44,16 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public List<Problem> findByCha(String chapter,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_cha",chapter);
+        queryWrapper.like("pro_cha",chapter);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         return iPage.getRecords();
     }
 
     @Override
-    public List<Problem> findByKeyw(String keyword,int index,int size) {
+    public List<Problem> findBySimple(String simple,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_keyw",keyword);
+        queryWrapper.like("pro_simple",simple);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         return iPage.getRecords();
@@ -69,9 +69,18 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Problem> findByCla(int classNo, int index, int size) {
+    public List<Problem> findByCla(String c, int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_class",classNo);
+        queryWrapper.like("pro_class",c);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        return iPage.getRecords();
+    }
+
+    @Override
+    public List<Problem> findByTea(int tid, int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         return iPage.getRecords();
