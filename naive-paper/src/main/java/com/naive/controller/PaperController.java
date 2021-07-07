@@ -61,6 +61,7 @@ public class PaperController {
      * @return
      */
     @ApiOperation(value = "老师删除试卷")
+    @GetMapping("delete_by_id/{paperId}")
     public int deleteById(@PathVariable("paperId") int paperId){
         return paperService.deleteById(paperId);
     }
@@ -88,7 +89,7 @@ public class PaperController {
      * @return
      */
     @ApiOperation("根据教师分页寻找试卷")
-    @GetMapping("findByCla/{paperTea}/{index}/{size}")
+    @GetMapping("findByTea/{paperTea}/{index}/{size}")
     public List<Paper> findByTea(@PathVariable("paperTea") int paperTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){

@@ -64,7 +64,7 @@ public class QuestionController {
      * @return
      */
     @ApiOperation("根据题目简称分页寻找试题")
-    @GetMapping("findByKeyw/{simple}/{index}/{size}")
+    @GetMapping("findBySimple/{simple}/{index}/{size}")
     public List<Problem> findBySimple(@PathVariable("simple") String simple,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
@@ -109,7 +109,7 @@ public class QuestionController {
      * @return
      */
     @ApiOperation("根据教师分页寻找试题")
-    @GetMapping("findByCla/{proTea}/{index}/{size}")
+    @GetMapping("findByTea/{proTea}/{index}/{size}")
     public List<Problem> findByTea(@PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
