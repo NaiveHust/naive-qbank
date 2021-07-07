@@ -58,21 +58,6 @@ public class QuestionController {
 
     /**
      *
-     * @param chapter
-     * @param index
-     * @param size
-     * @return
-     */
-    @ApiOperation("根据章节分页寻找试题")
-    @GetMapping("findByCha/{chapter}/{index}/{size}")
-    public List<Problem> findByCha(@PathVariable("chapter") String chapter,
-                                   @PathVariable("index") int index,
-                                   @PathVariable("size") int size){
-        return questionService.findByCha(chapter,index,size);
-    }
-
-    /**
-     *
      * @param simple
      * @param index
      * @param size

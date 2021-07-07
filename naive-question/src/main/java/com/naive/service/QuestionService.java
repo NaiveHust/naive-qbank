@@ -17,8 +17,6 @@ public interface QuestionService {
 
     int deleteById(int proId);
 
-    List<Problem> findByCha(String chapter,int index,int size);
-
     List<Problem> findBySimple(String simple,int index,int size);
 
     List<Problem> findByDif(String difficulty,int index,int size);

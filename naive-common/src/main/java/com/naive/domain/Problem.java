@@ -16,7 +16,6 @@ public class Problem {
     private String proDif;
     private String proType;
     private String proAns;
-    private String proCha;
     private Integer proTea;
     private String proClass;
 
@@ -68,14 +67,6 @@ public class Problem {
         this.proAns = proAns;
     }
 
-    public String getProCha() {
-        return proCha;
-    }
-
-    public void setProCha(String proCha) {
-        this.proCha = proCha;
-    }
-
     public Integer getProTea() {
         return proTea;
     }
@@ -101,7 +92,6 @@ public class Problem {
                 ", proDif='" + proDif + '\'' +
                 ", proType='" + proType + '\'' +
                 ", proAns='" + proAns + '\'' +
-                ", proCha='" + proCha + '\'' +
                 ", proTea=" + proTea +
                 ", proClass='" + proClass + '\'' +
                 '}';

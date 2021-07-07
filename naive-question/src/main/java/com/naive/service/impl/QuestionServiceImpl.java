@@ -42,15 +42,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Problem> findByCha(String chapter,int index,int size) {
-        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("pro_cha",chapter);
-        Page<Problem> page = new Page<>(index,size);
-        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
-    }
-
-    @Override
     public List<Problem> findBySimple(String simple,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("pro_simple",simple);
