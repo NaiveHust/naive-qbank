@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,46 +59,53 @@ public class QuestionController {
     /**
      *
      * @param simple
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据题目简称分页寻找试题")
-    @GetMapping("findBySimple/{simple}/{index}/{size}")
-    public List<Problem> findBySimple(@PathVariable("simple") String simple,
+    @ApiOperation("教师根据题目简称分页寻找试题")
+    @GetMapping("findBySimple/{simple}/{proTea}/{index}/{size}")
+    public Map<String,Object> findBySimple(@PathVariable("simple") String simple,
+                                           @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findBySimple(simple,index,size);
+        return questionService.findBySimple(simple,proTea,index,size);
     }
+
 
     /**
      *
      * @param difficulty
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据难度分页寻找试题")
-    @GetMapping("findByDif/{difficulty}/{index}/{size}")
-    public List<Problem> findByDif(@PathVariable("difficulty") String difficulty,
+    @ApiOperation("教师根据难度分页寻找试题")
+    @GetMapping("findByDif/{difficulty}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByDif(@PathVariable("difficulty") String difficulty,
+                                        @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByDif(difficulty,index,size);
+        return questionService.findByDif(difficulty,proTea,index,size);
     }
 
     /**
      *
      * @param proClass
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据课程分页寻找试题")
-    @GetMapping("findByCla/{proClass}/{index}/{size}")
-    public List<Problem> findByCla(@PathVariable("proClass") String proClass,
+    @ApiOperation("教师根据课程分页寻找试题")
+    @GetMapping("findByCla/{proClass}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByCla(@PathVariable("proClass") String proClass,
+                                        @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByCla(proClass,index,size);
+        return questionService.findByCla(proClass,proTea,index,size);
     }
 
     /**

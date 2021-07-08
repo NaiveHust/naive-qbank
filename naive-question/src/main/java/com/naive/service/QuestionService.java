@@ -18,11 +18,11 @@ public interface QuestionService {
 
     int deleteById(int proId);
 
-    List<Problem> findBySimple(String simple,int index,int size);
+    Map<String,Object> findBySimple(String simple,int tid,int index,int size);
 
-    List<Problem> findByDif(String difficulty,int index,int size);
+    Map<String,Object> findByDif(String difficulty,int tid,int index,int size);
 
-    List<Problem> findByCla(String c,int index,int size);
+    Map<String,Object> findByCla(String c,int tid,int index,int size);
 
     Map<String,Object> findByTea(int tid, int index, int size);
 
