@@ -24,7 +24,7 @@ public interface QuestionService {
 
     List<Problem> findByCla(String c,int index,int size);
 
-    Map<Integer,List<Problem>> findByTea(int tid, int index, int size);
+    Map<String,Object> findByTea(int tid, int index, int size);
 
     int deleteByTea(int teaId);
 }

@@ -111,7 +111,7 @@ public class QuestionController {
      */
     @ApiOperation("根据教师分页寻找试题")
     @GetMapping("findByTea/{proTea}/{index}/{size}")
-    public Map<Integer,List<Problem>> findByTea(@PathVariable("proTea") int proTea,
+    public Map<String,Object> findByTea(@PathVariable("proTea") int proTea,
                                                 @PathVariable("index") int index,
                                                 @PathVariable("size") int size){
         return questionService.findByTea(proTea,index,size);

@@ -71,15 +71,16 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Map<Integer,List<Problem>> findByTea(int tid, int index, int size) {
+    public Map<String,Object> findByTea(int tid, int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         Integer count = questionMapper.selectCount(queryWrapper);
         List<Problem> list = iPage.getRecords();
-        Map<Integer,List<Problem>> map = new HashMap<>();
-        map.put(count,list);
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
         return map;
     }
 
