@@ -14,17 +14,17 @@ import org.springframework.context.annotation.Configuration;
  * RabbitMQ配置类
  */
 @Configuration
-public class RabbitMQConfig {
+public class TeaMQConfig {
     //交换机名称
-    public static final String ITEM_TOPIC_EXCHANGE = "stu_exchange";
+    public static final String ITEM_TOPIC_EXCHANGE = "tea_exchange";
 
     //队列名称
-    public static final String ITEM_QUEUE = "stu_queue";
+    public static final String ITEM_QUEUE = "tea_queue";
 
     /**
      * 声明交换机
      */
-    @Bean("itemTopicExchange")
+    @Bean("teaTopicExchange")
     public Exchange topicExchange(){
         return ExchangeBuilder.topicExchange(ITEM_TOPIC_EXCHANGE).durable(true).build();
     }
@@ -32,7 +32,7 @@ public class RabbitMQConfig {
     /***
      * 声明队列
      */
-    @Bean("itemQueue")
+    @Bean("teaQueue")
     public Queue itemQueue(){
         return QueueBuilder.durable(ITEM_QUEUE).build();
     }
@@ -44,10 +44,10 @@ public class RabbitMQConfig {
      * @param exchange
      * @return
      */
-    @Bean
-    public Binding itemQueueExchange(@Qualifier("itemQueue") Queue queue,
-                                     @Qualifier("itemTopicExchange") Exchange exchange){
-        return BindingBuilder.bind(queue).to(exchange).with("stu.#").noargs();
+    @Bean("teaBind")
+    public Binding itemQueueExchange(@Qualifier("teaQueue") Queue queue,
+                                     @Qualifier("teaTopicExchange") Exchange exchange){
+        return BindingBuilder.bind(queue).to(exchange).with("tea.#").noargs();
     }
 
 }

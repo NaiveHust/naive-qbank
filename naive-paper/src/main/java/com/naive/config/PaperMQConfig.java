@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * RabbitMQ配置类
  */
 @Configuration
-public class RabbitMQConfig {
+public class PaperMQConfig {
     //交换机名称
     public static final String ITEM_TOPIC_EXCHANGE = "paper_exchange";
 
@@ -44,7 +44,7 @@ public class RabbitMQConfig {
      * @param exchange
      * @return
      */
-    @Bean
+    @Bean("paperBind")
     public Binding itemQueueExchange(@Qualifier("paperQueue") Queue queue,
                                      @Qualifier("paperTopicExchange") Exchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with("paper.#").noargs();

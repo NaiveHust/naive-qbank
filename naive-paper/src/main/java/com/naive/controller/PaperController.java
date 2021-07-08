@@ -1,8 +1,7 @@
 package com.naive.controller;
 
-import com.naive.config.RabbitMQConfig;
+import com.naive.config.PaperMQConfig;
 import com.naive.domain.Paper;
-import com.naive.domain.Problem;
 import com.naive.service.PaperService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,7 +67,7 @@ public class PaperController {
     @ApiOperation(value = "老师删除试卷")
     @GetMapping("delete_by_id/{paperId}")
     public int deleteById(@PathVariable("paperId") int paperId){
-        rabbitTemplate.convertAndSend(RabbitMQConfig.ITEM_TOPIC_EXCHANGE,"paper.deleteId",String.valueOf(paperId));
+        rabbitTemplate.convertAndSend(PaperMQConfig.ITEM_TOPIC_EXCHANGE,"paper.deleteId",String.valueOf(paperId));
         System.out.println("试卷生产者生产消息:"+String.valueOf(paperId));
         return paperService.deleteById(paperId);
     }
@@ -101,11 +100,6 @@ public class PaperController {
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return paperService.findByTea(paperTea,index,size);
-    }
-
-    @GetMapping("deleteByTea/{tid}")
-    public int deleteByTea(@PathVariable("tid") int tid){
-        return paperService.deleteByTea(tid);
     }
 
 }

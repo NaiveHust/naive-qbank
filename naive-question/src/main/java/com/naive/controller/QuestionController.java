@@ -116,14 +116,4 @@ public class QuestionController {
                                                 @PathVariable("size") int size){
         return questionService.findByTea(proTea,index,size);
     }
-
-    /**
-     *
-     * @param tid
-     * @return
-     */
-    @GetMapping("deleteByTea/{tid}")
-    public int deleteByTea(@PathVariable("tid") int tid){
-        return questionService.deleteByTea(tid);
-    }
 }
