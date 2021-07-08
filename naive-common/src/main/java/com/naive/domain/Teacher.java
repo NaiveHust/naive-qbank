@@ -7,62 +7,31 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @author YechenGu
  * @date 2021/6/28 10:29 上午
  */
-public class Teacher {
-    @TableId(type = IdType.AUTO)
-    private int teaNo;
-    private String teaName;
-    private String teaPwd;
-    private String teaDiscipline;
-    private String teaMail;
+public class Teacher extends User{
+    private String discipline;
+    private String mail;
 
-    public int getTeaNo() {
-        return teaNo;
+    public String getDiscipline() {
+        return discipline;
     }
 
-    public void setTeaNo(int teaNo) {
-        this.teaNo = teaNo;
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
     }
 
-    public String getTeaName() {
-        return teaName;
+    public String getMail() {
+        return mail;
     }
 
-    public void setTeaName(String teaName) {
-        this.teaName = teaName;
-    }
-
-    public String getTeaPwd() {
-        return teaPwd;
-    }
-
-    public void setTeaPwd(String teaPwd) {
-        this.teaPwd = teaPwd;
-    }
-
-    public String getTeaDiscipline() {
-        return teaDiscipline;
-    }
-
-    public void setTeaDiscipline(String teaDiscipline) {
-        this.teaDiscipline = teaDiscipline;
-    }
-
-    public String getTeaMail() {
-        return teaMail;
-    }
-
-    public void setTeaMail(String teaMail) {
-        this.teaMail = teaMail;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     @Override
     public String toString() {
         return "Teacher{" +
-                "teaNo=" + teaNo +
-                ", teaName='" + teaName + '\'' +
-                ", teaPwd='" + teaPwd + '\'' +
-                ", teaDiscipline='" + teaDiscipline + '\'' +
-                ", teaMail='" + teaMail + '\'' +
+                "discipline='" + discipline + '\'' +
+                ", mail='" + mail + '\'' +
                 '}';
     }
 }

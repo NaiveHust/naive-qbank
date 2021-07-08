@@ -5,16 +5,22 @@ spring:
   application:
     name: api-gateway
   zipkin:
-    base-url: http://127.0.0.1:9411/ #zipkin地址
+    base-url: http://123.57.215.118:9411/ #zipkin地址
     discovery-client-enabled: false  #不用开启服务发现
   sleuth:
     sampler:
       probability: 1.0 #采样百分比,默认为0.1，即10%，这里配置1，是记录全部的sleuth信息
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2zek1x5h9g063oda1yo.mysql.rds.aliyuncs.com:3306/user?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: Aliyun00
+
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 123.57.215.118:8848
 
     gateway:
       routes: #数组形式
@@ -33,6 +39,22 @@ spring:
             - Path=/naive-question/**
           filters: #过滤器，请求在传递过程中通过过滤器修改
             - StripPrefix=1  #去掉第一层前缀
+
+        - id: naive-paper  #路由唯一标识
+          uri: lb://naive-paper  # 从nacos获取名称转发,lb是负载均衡轮询策略
+          order: 1 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发
+              - Path=/naive-paper/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+              - StripPrefix=1  #去掉第一层前缀
+
+        - id: naive-test  #路由唯一标识
+          uri: lb://naive-test  # 从nacos获取名称转发,lb是负载均衡轮询策略
+          order: 1 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发
+              - Path=/naive-test/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+              - StripPrefix=1
 
       discovery:
         locator:

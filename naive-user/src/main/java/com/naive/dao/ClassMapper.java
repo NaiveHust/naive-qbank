@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author YechenGu
- * @date 2021/7/1 9:09 上午
+ * @date 2021/7/7 11:32 上午
  */
 @Repository
 public interface ClassMapper extends BaseMapper<Class> {

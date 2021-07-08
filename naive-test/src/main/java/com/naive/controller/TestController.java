@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api("测验功能")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/test")
 public class TestController {
     @Autowired

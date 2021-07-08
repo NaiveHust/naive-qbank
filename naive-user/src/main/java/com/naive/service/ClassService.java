@@ -1,17 +1,22 @@
 package com.naive.service;
 
 import com.naive.domain.Class;
+import com.naive.domain.Relation;
 
 import java.util.List;
 
 /**
  * @author YechenGu
- * @date 2021/7/1 9:10 上午
+ * @date 2021/7/7 11:33 上午
  */
 public interface ClassService {
-    int add(Class cla);
+    int addClass(Class c);
 
-    List<Class> findByTea(int teaId);
+    List<Class> findByName(String cname);
 
-    List<Class> findByStu(int stuId);
+    int addRelation(Relation relation);
+
+    List<Integer> findStu(int cid,int tid);
+
+    List<Relation> findClass(int sid);
 }

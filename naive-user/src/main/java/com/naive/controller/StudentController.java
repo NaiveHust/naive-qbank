@@ -1,10 +1,12 @@
 package com.naive.controller;
 
+import com.naive.config.StuMQConfig;
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
 import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "学生管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/student")
 public class StudentController {
     @Autowired
@@ -21,6 +24,9 @@ public class StudentController {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * find student via id
@@ -55,7 +61,7 @@ public class StudentController {
     @ApiOperation("根据id更新学生")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Student student){
-        redisUtils.remove("stuId"+student.getStuNo());
+        redisUtils.remove("stuId"+student.getId());
         return studentService.updateById(student);
     }
 
@@ -63,9 +69,11 @@ public class StudentController {
      * delete student via id
      * */
     @ApiOperation("根据id删除学生")
-    @GetMapping("delete_by_id/{stu_id}")
+    @GetMapping("delete_by_id/{stuId}")
     public int deleteById(@PathVariable("stuId") int stuId){
         redisUtils.remove("stuId"+stuId);
+        rabbitTemplate.convertAndSend(StuMQConfig.ITEM_TOPIC_EXCHANGE,"stu.delete",String.valueOf(stuId));
+        System.out.println("学生生产者生产消息: "+String.valueOf(stuId));
         return studentService.deleteById(stuId);
     }
 
@@ -80,4 +88,5 @@ public class StudentController {
     public Object checkPwd(@PathVariable("id") int id, @PathVariable("pwd") String pwd){
         return studentService.checkPwd(id,pwd);
     }
+
 }

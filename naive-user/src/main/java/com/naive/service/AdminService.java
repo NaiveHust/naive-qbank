@@ -14,4 +14,6 @@ public interface AdminService {
     int add(Admin admin);
 
     int deleteById(int adId);
+
+    Admin checkPwd(int id,String pwd);
 }

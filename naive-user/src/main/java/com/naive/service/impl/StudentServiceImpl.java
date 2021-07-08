@@ -7,6 +7,8 @@ import com.naive.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YechenGu
  * @date 2021/6/28 10:50 上午
@@ -57,8 +59,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student checkPwd(int id, String pwd) {
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.eq("stu_no",id);
-        studentQueryWrapper.eq("stu_pwd",pwd);
+        studentQueryWrapper.eq("id",id);
+        studentQueryWrapper.eq("pwd",pwd);
         return studentMapper.selectOne(studentQueryWrapper);
     }
 

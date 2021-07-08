@@ -1,12 +1,15 @@
 package com.naive.controller;
 
+import com.naive.config.TeaMQConfig;
 import com.naive.domain.Teacher;
 import com.naive.service.TeacherService;
 import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * @author YechenGu
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "教师管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/teacher")
 public class TeacherController {
     @Autowired
@@ -21,6 +25,9 @@ public class TeacherController {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     /**
      * find teacher via id
@@ -55,7 +62,7 @@ public class TeacherController {
     @ApiOperation("根据id更新教师")
     @PostMapping("update_by_id")
     public int updateById(@RequestBody Teacher teacher){
-        redisUtils.remove("teaId"+teacher.getTeaNo());
+        redisUtils.remove("teaId"+teacher.getId());
         return teacherService.updateById(teacher);
     }
 
@@ -66,6 +73,9 @@ public class TeacherController {
     @GetMapping("delete_by_id/{teaId}")
     public int deleteById(@PathVariable("teaId") int teaId){
         redisUtils.remove("teaId"+teaId);
+        rabbitTemplate.convertAndSend(TeaMQConfig.ITEM_TOPIC_EXCHANGE,"tea.delete",String.valueOf(teaId));
+        rabbitTemplate.convertAndSend(TeaMQConfig.ITEM_TOPIC_EXCHANGE,"tea.delete",String.valueOf(teaId));
+        System.out.println("教师生产者生产消息: "+String.valueOf(teaId));
         return teacherService.deleteById(teaId);
     }
 

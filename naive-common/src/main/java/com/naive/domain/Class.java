@@ -8,51 +8,51 @@ import com.baomidou.mybatisplus.annotation.TableId;
  * @date 2021/6/30 5:04 下午
  */
 public class Class {
-    @TableId(type = IdType.AUTO)
-    private int classNo;
-    private String className;
-    private Integer stuNo;
-    private Integer teaNo;
+    @TableId("id")
+    private int id;
+    private String name;
+    private int tid;
+    private String tname;
 
-    public int getClassNo() {
-        return classNo;
+    public int getId() {
+        return id;
     }
 
-    public void setClassNo(int classNo) {
-        this.classNo = classNo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getClassName() {
-        return className;
+    public String getName() {
+        return name;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getStuNo() {
-        return stuNo;
+    public int getTid() {
+        return tid;
     }
 
-    public void setStuNo(Integer stuNo) {
-        this.stuNo = stuNo;
+    public void setTid(int tid) {
+        this.tid = tid;
     }
 
-    public Integer getTeaNo() {
-        return teaNo;
+    public String getTname() {
+        return tname;
     }
 
-    public void setTeaNo(Integer teaNo) {
-        this.teaNo = teaNo;
+    public void setTname(String tname) {
+        this.tname = tname;
     }
 
     @Override
     public String toString() {
         return "Class{" +
-                "classNo=" + classNo +
-                ", className='" + className + '\'' +
-                ", stuNo=" + stuNo +
-                ", teaNo=" + teaNo +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tid=" + tid +
+                ", tname='" + tname + '\'' +
                 '}';
     }
 }

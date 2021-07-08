@@ -15,7 +15,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @MapperScan("com.naive.dao")
 @SpringBootApplication
-@EnableFeignClients
 public class TestApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestApplication.class,args);

@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Api(tags = "试题管理")
 @RestController
+@CrossOrigin
 @RequestMapping("api/v1/question")
 public class QuestionController {
     @Autowired
@@ -57,61 +58,68 @@ public class QuestionController {
 
     /**
      *
-     * @param chapter
+     * @param simple
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据章节分页寻找试题")
-    @GetMapping("findByCha/{chapter}/{index}/{size}")
-    public List<Problem> findByCha(@PathVariable("chapter") String chapter,
+    @ApiOperation("教师根据题目简称分页寻找试题")
+    @GetMapping("findBySimple/{simple}/{proTea}/{index}/{size}")
+    public Map<String,Object> findBySimple(@PathVariable("simple") String simple,
+                                           @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByCha(chapter,index,size);
+        return questionService.findBySimple(simple,proTea,index,size);
     }
 
-    /**
-     *
-     * @param keyword
-     * @param index
-     * @param size
-     * @return
-     */
-    @ApiOperation("根据关键词分页寻找试题")
-    @GetMapping("findByKeyw/{keyword}/{index}/{size}")
-    public List<Problem> findByKeyw(@PathVariable("keyword") String keyword,
-                                   @PathVariable("index") int index,
-                                   @PathVariable("size") int size){
-        return questionService.findByKeyw(keyword,index,size);
-    }
 
     /**
      *
      * @param difficulty
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据难度分页寻找试题")
-    @GetMapping("findByDif/{difficulty}/{index}/{size}")
-    public List<Problem> findByDif(@PathVariable("difficulty") String difficulty,
+    @ApiOperation("教师根据难度分页寻找试题")
+    @GetMapping("findByDif/{difficulty}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByDif(@PathVariable("difficulty") String difficulty,
+                                        @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByDif(difficulty,index,size);
+        return questionService.findByDif(difficulty,proTea,index,size);
     }
 
     /**
      *
      * @param proClass
+     * @param proTea
      * @param index
      * @param size
      * @return
      */
-    @ApiOperation("根据课程分页寻找试题")
-    @GetMapping("findByCla/{proClass}/{index}/{size}")
-    public List<Problem> findByCla(@PathVariable("proClass") int proClass,
+    @ApiOperation("教师根据课程分页寻找试题")
+    @GetMapping("findByCla/{proClass}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByCla(@PathVariable("proClass") String proClass,
+                                        @PathVariable("proTea") int proTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
-        return questionService.findByCla(proClass,index,size);
+        return questionService.findByCla(proClass,proTea,index,size);
+    }
+
+    /**
+     *
+     * @param proTea
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("根据教师分页寻找试题")
+    @GetMapping("findByTea/{proTea}/{index}/{size}")
+    public Map<String,Object> findByTea(@PathVariable("proTea") int proTea,
+                                                @PathVariable("index") int index,
+                                                @PathVariable("size") int size){
+        return questionService.findByTea(proTea,index,size);
     }
 }

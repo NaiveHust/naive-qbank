@@ -3,6 +3,7 @@ package com.naive.service;
 import com.naive.domain.Problem;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -17,11 +18,13 @@ public interface QuestionService {
 
     int deleteById(int proId);
 
-    List<Problem> findByCha(String chapter,int index,int size);
+    Map<String,Object> findBySimple(String simple,int tid,int index,int size);
 
-    List<Problem> findByKeyw(String keyword,int index,int size);
+    Map<String,Object> findByDif(String difficulty,int tid,int index,int size);
 
-    List<Problem> findByDif(String difficulty,int index,int size);
+    Map<String,Object> findByCla(String c,int tid,int index,int size);
 
-    List<Problem> findByCla(int classNo,int index,int size);
+    Map<String,Object> findByTea(int tid, int index, int size);
+
+    int deleteByTea(int teaId);
 }

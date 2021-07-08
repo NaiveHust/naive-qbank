@@ -7,6 +7,8 @@ import com.naive.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YechenGu
  * @date 2021/6/28 3:12 下午
@@ -39,8 +41,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher checkPwd(int id, String pwd) {
         QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
-        teacherQueryWrapper.eq("tea_no",id);
-        teacherQueryWrapper.eq("tea_pwd",pwd);
+        teacherQueryWrapper.eq("id",id);
+        teacherQueryWrapper.eq("pwd",pwd);
         return teacherMapper.selectOne(teacherQueryWrapper);
     }
+
 }

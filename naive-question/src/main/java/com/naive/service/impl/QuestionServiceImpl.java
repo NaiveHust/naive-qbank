@@ -10,7 +10,9 @@ import com.naive.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -42,38 +44,69 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Problem> findByCha(String chapter,int index,int size) {
+    public Map<String,Object> findBySimple(String simple,int tid,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_cha",chapter);
+        queryWrapper.like("pro_simple",simple);
+        queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 
     @Override
-    public List<Problem> findByKeyw(String keyword,int index,int size) {
-        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_keyw",keyword);
-        Page<Problem> page = new Page<>(index,size);
-        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
-    }
-
-    @Override
-    public List<Problem> findByDif(String difficulty,int index,int size) {
+    public Map<String,Object> findByDif(String difficulty,int tid,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("pro_dif",difficulty);
+        queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 
     @Override
-    public List<Problem> findByCla(int classNo, int index, int size) {
+    public Map<String,Object> findByCla(String c,int tid, int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("pro_class",classNo);
+        queryWrapper.like("pro_class",c);
+        queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByTea(int tid, int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_tea",tid);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public int deleteByTea(int teaId) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_tea",teaId);
+        questionMapper.delete(queryWrapper);
+        return 0;
     }
 }
