@@ -1,6 +1,8 @@
 package com.naive.controller;
 
 import com.naive.domain.Teacher;
+import com.naive.service.PaperService;
+import com.naive.service.QuestionService;
 import com.naive.service.TeacherService;
 import com.naive.utils.RedisUtils;
 import io.swagger.annotations.Api;
@@ -8,7 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @author YechenGu
@@ -24,6 +25,12 @@ public class TeacherController {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private PaperService paperService;
 
     /**
      * find teacher via id
@@ -69,7 +76,10 @@ public class TeacherController {
     @GetMapping("delete_by_id/{teaId}")
     public int deleteById(@PathVariable("teaId") int teaId){
         redisUtils.remove("teaId"+teaId);
-        return teacherService.deleteById(teaId);
+        int res1 = questionService.deleteByTea(teaId);
+        int res2 = paperService.deleteByTea(teaId);
+        int res3 = teacherService.deleteById(teaId);
+        return res1 & res2 & res3;
     }
 
     /**

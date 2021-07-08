@@ -75,7 +75,7 @@ public class StudentController {
     public int deleteById(@PathVariable("stuId") int stuId){
         redisUtils.remove("stuId"+stuId);
         rabbitTemplate.convertAndSend(RabbitMQConfig.ITEM_TOPIC_EXCHANGE,"stu.delete",String.valueOf(stuId));
-        System.out.println("send message: "+String.valueOf(stuId));
+        System.out.println("学生生产者生产消息: "+String.valueOf(stuId));
         return studentService.deleteById(stuId);
     }
 

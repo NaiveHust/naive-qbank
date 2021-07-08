@@ -59,4 +59,11 @@ public class PaperServiceImpl implements PaperService {
         return iPage.getRecords();
     }
 
+    @Override
+    public int deleteByTea(int tid) {
+        QueryWrapper<Paper> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("paper_tea",tid);
+        return paperMapper.delete(queryWrapper);
+    }
+
 }

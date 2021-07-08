@@ -5,7 +5,7 @@ spring:
   application:
     name: naive-user
   zipkin:
-    base-url: http://127.0.0.1:9411/ #zipkin地址
+    base-url: http://123.57.215.118:9411/ #zipkin地址
     discovery-client-enabled: false  #不用开启服务发现
   sleuth:
     sampler:
@@ -20,14 +20,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 123.57.215.118:8848
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8080
+        dashboard: 123.57.215.118:8858
         port: 9999
 
   redis:
-    host: 127.0.0.1
+    host: 123.57.215.118
     port: 6379
     database: 0
     timeout: 30000

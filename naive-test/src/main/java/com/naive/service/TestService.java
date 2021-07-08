@@ -14,4 +14,6 @@ public interface TestService {
     int update(Test test);
 
     int deleteByStu(int stuId);
+
+    int deleteByPaper(int pid);
 }

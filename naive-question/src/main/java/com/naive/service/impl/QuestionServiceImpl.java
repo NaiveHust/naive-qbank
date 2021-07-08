@@ -10,7 +10,9 @@ import com.naive.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -69,11 +71,23 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Problem> findByTea(int tid, int index, int size) {
+    public Map<Integer,List<Problem>> findByTea(int tid, int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("pro_tea",tid);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
-        return iPage.getRecords();
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<Integer,List<Problem>> map = new HashMap<>();
+        map.put(count,list);
+        return map;
+    }
+
+    @Override
+    public int deleteByTea(int teaId) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_tea",teaId);
+        questionMapper.delete(queryWrapper);
+        return 0;
     }
 }

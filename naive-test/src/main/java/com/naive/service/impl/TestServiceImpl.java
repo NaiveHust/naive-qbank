@@ -40,4 +40,11 @@ public class TestServiceImpl implements TestService {
         queryWrapper.eq("stu_no",stuId);
         return testMapper.delete(queryWrapper);
     }
+
+    @Override
+    public int deleteByPaper(int pid) {
+        QueryWrapper<Test> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("paper_no",pid);
+        return testMapper.delete(queryWrapper);
+    }
 }

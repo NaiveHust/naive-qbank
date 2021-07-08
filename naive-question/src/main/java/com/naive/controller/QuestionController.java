@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -110,9 +111,19 @@ public class QuestionController {
      */
     @ApiOperation("根据教师分页寻找试题")
     @GetMapping("findByTea/{proTea}/{index}/{size}")
-    public List<Problem> findByTea(@PathVariable("proTea") int proTea,
-                                   @PathVariable("index") int index,
-                                   @PathVariable("size") int size){
+    public Map<Integer,List<Problem>> findByTea(@PathVariable("proTea") int proTea,
+                                                @PathVariable("index") int index,
+                                                @PathVariable("size") int size){
         return questionService.findByTea(proTea,index,size);
+    }
+
+    /**
+     *
+     * @param tid
+     * @return
+     */
+    @GetMapping("deleteByTea/{tid}")
+    public int deleteByTea(@PathVariable("tid") int tid){
+        return questionService.deleteByTea(tid);
     }
 }

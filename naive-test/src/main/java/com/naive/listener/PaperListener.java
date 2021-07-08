@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author YechenGu
- * @date 2021/7/3 9:27 上午
+ * @date 2021/7/8 10:06 上午
  */
 @Component
-public class StuListener {
+public class PaperListener {
     @Autowired
     private TestService testService;
 
-    @RabbitListener(queues = "stu_queue")
+    @RabbitListener(queues = "paper_queue")
     public void msg(String msg){
-        System.out.println("学生消费者消费消息："+msg);
+        System.out.println("试卷消费者消费消息："+msg);
         try {
             System.out.println(Integer.valueOf(msg));
-            testService.deleteByStu(Integer.valueOf(msg));
+            testService.deleteByPaper(Integer.valueOf(msg));
         }catch (Exception e){
             System.out.println(e);
         }

@@ -2,7 +2,7 @@ package com.naive.config;
 
 /**
  * @author YechenGu
- * @date 2021/7/3 9:12 上午
+ * @date 2021/7/3 9:19 上午
  */
 
 import org.springframework.amqp.core.*;
@@ -14,17 +14,17 @@ import org.springframework.context.annotation.Configuration;
  * RabbitMQ配置类
  */
 @Configuration
-public class RabbitMQConfig {
+public class PaperMQConfig {
     //交换机名称
-    public static final String ITEM_TOPIC_EXCHANGE = "stu_exchange";
+    public static final String ITEM_TOPIC_EXCHANGE = "paper_exchange";
 
     //队列名称
-    public static final String ITEM_QUEUE = "stu_queue";
+    public static final String ITEM_QUEUE = "paper_queue";
 
     /**
      * 声明交换机
      */
-    @Bean("itemTopicExchange")
+    @Bean("paperTopicExchange")
     public Exchange topicExchange(){
         return ExchangeBuilder.topicExchange(ITEM_TOPIC_EXCHANGE).durable(true).build();
     }
@@ -32,7 +32,7 @@ public class RabbitMQConfig {
     /***
      * 声明队列
      */
-    @Bean("itemQueue")
+    @Bean("paperQueue")
     public Queue itemQueue(){
         return QueueBuilder.durable(ITEM_QUEUE).build();
     }
@@ -44,10 +44,10 @@ public class RabbitMQConfig {
      * @param exchange
      * @return
      */
-    @Bean
-    public Binding itemQueueExchange(@Qualifier("itemQueue") Queue queue,
-                                     @Qualifier("itemTopicExchange") Exchange exchange){
-        return BindingBuilder.bind(queue).to(exchange).with("stu.#").noargs();
+    @Bean("paperBind")
+    public Binding itemQueueExchange(@Qualifier("paperQueue") Queue queue,
+                                     @Qualifier("paperTopicExchange") Exchange exchange){
+        return BindingBuilder.bind(queue).to(exchange).with("paper.#").noargs();
     }
 
 }
