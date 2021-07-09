@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.ClassMapper;
 import com.naive.dao.RelationMapper;
+import com.naive.dao.StudentMapper;
 import com.naive.domain.Class;
 import com.naive.domain.Relation;
+import com.naive.domain.Student;
 import com.naive.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     private RelationMapper relationMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     @Override
     public int addClass(Class c) {
@@ -43,58 +48,69 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public List<Integer> findStu(int cid, int tid) {
+    public Map<String,Object> findStu(int cid, int tid) {
         QueryWrapper<Relation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("cid",cid);
         queryWrapper.eq("tid",tid);
+        // find suitable relation
         List<Relation> relations = relationMapper.selectList(queryWrapper);
         List<Integer> list = new ArrayList<>();
-        List<Integer> list1 = new ArrayList<>();
+        // get needed sid
         for (Relation r:relations){
             list.add(r.getSid());
         }
         Set<Integer> set = new HashSet<>();
+        // remove duplicated ones
         set.addAll(list);
-        for (Integer i:set){
-            list1.add(i);
-        }
-        return list1;
+        Integer count = set.size();
+        // find students
+        List<Student> list1 = studentMapper.selectBatchIds(set);
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list1);
+        return map;
     }
 
     @Override
-    public List<Integer> findClaByStu(int sid) {
+    public Map<String,Object> findClaByStu(int sid) {
         QueryWrapper<Relation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("sid",sid);
         List<Integer> list = new ArrayList<>();
-        List<Integer> list1 = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
+        // find suitable relation
         List<Relation> relations =  relationMapper.selectList(queryWrapper);
+        // get needed cid
         for (Relation r:relations){
             list.add(r.getCid());
         }
+        // remove duplicated ones
         set.addAll(list);
-        for (Integer i:set){
-            list1.add(i);
-        }
-        return list1;
+        Integer count = set.size();
+        // find classes
+        List<Class> list1 = classMapper.selectBatchIds(set);
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list1);
+        return map;
     }
 
     @Override
-    public List<Integer> findClaByTea(int tid) {
-        QueryWrapper<Relation> queryWrapper = new QueryWrapper<>();
+    public Map<String,Object> findClaByTea(int tid) {
+        QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("tid",tid);
-        List<Integer> list = new ArrayList<>();
-        List<Integer> list1 = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
-        List<Relation> relations = relationMapper.selectList(queryWrapper);
-        for (Relation r:relations){
-            list.add(r.getCid());
+        List<Class> classes = classMapper.selectList(queryWrapper);
+        List<Integer> list = new ArrayList<>();
+        for (Class c:classes){
+            list.add(c.getId());
         }
         set.addAll(list);
-        for (Integer i:set){
-            list1.add(i);
-        }
-        return list1;
+        Integer count = set.size();
+        List<Class> list1 = classMapper.selectBatchIds(set);
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list1);
+        return map;
     }
 
     @Override

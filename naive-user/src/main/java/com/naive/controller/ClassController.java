@@ -43,19 +43,19 @@ public class ClassController {
 
     @ApiOperation("查找学生")
     @GetMapping("findStu/{cid}/{tid}")
-    public List<Integer> findStu(@PathVariable("cid") int cid,@PathVariable("tid") int tid){
+    public Map<String,Object> findStu(@PathVariable("cid") int cid,@PathVariable("tid") int tid){
         return classService.findStu(cid,tid);
     }
 
     @ApiOperation("根据学生查找课程")
     @GetMapping("findClaByStu/{sid}")
-    public List<Integer> findClaByStu(@PathVariable("sid") int sid){
+    public Map<String,Object> findClaByStu(@PathVariable("sid") int sid){
         return classService.findClaByStu(sid);
     }
 
     @ApiOperation("根据教师查找课程")
     @GetMapping("findClaByTea/{tid}")
-    public List<Integer> findClaByTea(@PathVariable("tid") int tid){
+    public Map<String,Object> findClaByTea(@PathVariable("tid") int tid){
         return classService.findClaByTea(tid);
     }
 
