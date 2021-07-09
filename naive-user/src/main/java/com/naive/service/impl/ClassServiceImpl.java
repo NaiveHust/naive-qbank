@@ -55,6 +55,14 @@ public class ClassServiceImpl implements ClassService {
         // find suitable relation
         List<Relation> relations = relationMapper.selectList(queryWrapper);
         List<Integer> list = new ArrayList<>();
+        List<Student> list1;
+        Map<String,Object> map;
+        if (relations.isEmpty()){
+            map = new HashMap<>(2);
+            map.put("totalCount",0);
+            map.put("list",new ArrayList<>());
+            return map;
+        }
         // get needed sid
         for (Relation r:relations){
             list.add(r.getSid());
@@ -64,8 +72,8 @@ public class ClassServiceImpl implements ClassService {
         set.addAll(list);
         Integer count = set.size();
         // find students
-        List<Student> list1 = studentMapper.selectBatchIds(set);
-        Map<String,Object> map = new HashMap<>(2);
+        list1 = studentMapper.selectBatchIds(set);
+        map = new HashMap<>(2);
         map.put("totalCount",count);
         map.put("list",list1);
         return map;
@@ -77,8 +85,16 @@ public class ClassServiceImpl implements ClassService {
         queryWrapper.eq("sid",sid);
         List<Integer> list = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
+        List<Class> list1;
+        Map<String,Object> map;
         // find suitable relation
         List<Relation> relations =  relationMapper.selectList(queryWrapper);
+        if (relations.isEmpty()){
+            map = new HashMap<>(2);
+            map.put("totalCount",0);
+            map.put("list",new ArrayList<>());
+            return map;
+        }
         // get needed cid
         for (Relation r:relations){
             list.add(r.getCid());
@@ -87,8 +103,8 @@ public class ClassServiceImpl implements ClassService {
         set.addAll(list);
         Integer count = set.size();
         // find classes
-        List<Class> list1 = classMapper.selectBatchIds(set);
-        Map<String,Object> map = new HashMap<>(2);
+        list1 = classMapper.selectBatchIds(set);
+        map = new HashMap<>(2);
         map.put("totalCount",count);
         map.put("list",list1);
         return map;
@@ -99,15 +115,23 @@ public class ClassServiceImpl implements ClassService {
         QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("tid",tid);
         Set<Integer> set = new HashSet<>();
+        List<Class> list1;
+        Map<String,Object> map;
         List<Class> classes = classMapper.selectList(queryWrapper);
+        if(classes.isEmpty()){
+            map = new HashMap<>(2);
+            map.put("totalCount",0);
+            map.put("list",new ArrayList<>());
+            return map;
+        }
         List<Integer> list = new ArrayList<>();
         for (Class c:classes){
             list.add(c.getId());
         }
         set.addAll(list);
         Integer count = set.size();
-        List<Class> list1 = classMapper.selectBatchIds(set);
-        Map<String,Object> map = new HashMap<>(2);
+        list1 = classMapper.selectBatchIds(set);
+        map = new HashMap<>(2);
         map.put("totalCount",count);
         map.put("list",list1);
         return map;
