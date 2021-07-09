@@ -27,4 +27,6 @@ public interface QuestionService {
     Map<String,Object> findByTea(int tid, int index, int size);
 
     int deleteByTea(int teaId);
+
+    Map<String,Object> findByPage(int index, int size);
 }

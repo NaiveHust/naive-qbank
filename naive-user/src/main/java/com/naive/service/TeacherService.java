@@ -3,6 +3,7 @@ package com.naive.service;
 import com.naive.domain.Teacher;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -18,4 +19,6 @@ public interface TeacherService {
     int deleteById(int teaId);
 
     Teacher checkPwd(int id, String pwd);
+
+    Map<String,Object> findByPage(int index, int size);
 }

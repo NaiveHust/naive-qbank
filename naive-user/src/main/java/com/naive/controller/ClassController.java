@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -46,10 +47,22 @@ public class ClassController {
         return classService.findStu(cid,tid);
     }
 
-    @ApiOperation("查找课程")
-    @GetMapping("findClass/{sid}")
-    public List<Relation> findClass(@PathVariable("sid") int sid){
-        return classService.findClass(sid);
+    @ApiOperation("根据学生查找课程")
+    @GetMapping("findClaByStu/{sid}")
+    public List<Integer> findClaByStu(@PathVariable("sid") int sid){
+        return classService.findClaByStu(sid);
     }
-    
+
+    @ApiOperation("根据教师查找课程")
+    @GetMapping("findClaByTea/{tid}")
+    public List<Integer> findClaByTea(@PathVariable("tid") int tid){
+        return classService.findClaByTea(tid);
+    }
+
+    @ApiOperation("管理员分页查找课程")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return classService.findByPage(index,size);
+    }
 }

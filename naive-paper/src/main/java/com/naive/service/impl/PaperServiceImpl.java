@@ -5,12 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.PaperMapper;
 import com.naive.domain.Paper;
-import com.naive.domain.Problem;
 import com.naive.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -64,6 +65,18 @@ public class PaperServiceImpl implements PaperService {
         QueryWrapper<Paper> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("paper_tea",tid);
         return paperMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public Map<String,Object> findByPage(int index, int size) {
+        Page<Paper> page = new Page<>(index,size);
+        IPage<Paper> iPage = paperMapper.selectPage(page,null);
+        Integer count = paperMapper.selectCount(null);
+        List<Paper> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 
 }

@@ -1,6 +1,5 @@
 package com.naive.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -108,5 +107,17 @@ public class QuestionServiceImpl implements QuestionService {
         queryWrapper.eq("pro_tea",teaId);
         questionMapper.delete(queryWrapper);
         return 0;
+    }
+
+    @Override
+    public Map<String,Object> findByPage(int index, int size) {
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,null);
+        Integer count = questionMapper.selectCount(null);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 }

@@ -1,13 +1,17 @@
 package com.naive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.StudentMapper;
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -62,6 +66,18 @@ public class StudentServiceImpl implements StudentService {
         studentQueryWrapper.eq("id",id);
         studentQueryWrapper.eq("pwd",pwd);
         return studentMapper.selectOne(studentQueryWrapper);
+    }
+
+    @Override
+    public Map<String,Object> findByPage(int index, int size) {
+        Page<Student> page = new Page<>(index,size);
+        IPage<Student> iPage = studentMapper.selectPage(page,null);
+        Integer count = studentMapper.selectCount(null);
+        List<Student> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 
 }

@@ -4,6 +4,7 @@ import com.naive.domain.Class;
 import com.naive.domain.Relation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -18,5 +19,9 @@ public interface ClassService {
 
     List<Integer> findStu(int cid,int tid);
 
-    List<Relation> findClass(int sid);
+    List<Integer> findClaByStu(int sid);
+
+    List<Integer> findClaByTea(int tid);
+
+    Map<String,Object> findByPage(int index, int size);
 }

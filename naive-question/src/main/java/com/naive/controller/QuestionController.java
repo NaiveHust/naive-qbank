@@ -122,4 +122,17 @@ public class QuestionController {
                                                 @PathVariable("size") int size){
         return questionService.findByTea(proTea,index,size);
     }
+
+    /**
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员分页查找试题")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return questionService.findByPage(index,size);
+    }
 }

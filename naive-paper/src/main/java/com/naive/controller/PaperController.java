@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -102,4 +103,16 @@ public class PaperController {
         return paperService.findByTea(paperTea,index,size);
     }
 
+    /**
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员分页查找试卷")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return paperService.findByPage(index,size);
+    }
 }

@@ -10,6 +10,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 /**
  * @author YechenGu
@@ -89,6 +91,20 @@ public class TeacherController {
     @GetMapping("check/{id}/{pwd}")
     public Object checkPwd(@PathVariable("id") int id, @PathVariable("pwd") String pwd){
         return teacherService.checkPwd(id,pwd);
+    }
+
+
+    /**
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员分页查找教师")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return teacherService.findByPage(index,size);
     }
 
 }
