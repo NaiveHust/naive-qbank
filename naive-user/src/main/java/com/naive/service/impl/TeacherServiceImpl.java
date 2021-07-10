@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.TeacherMapper;
 import com.naive.domain.Teacher;
 import com.naive.service.TeacherService;
+import com.naive.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +30,17 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int updateById(Teacher teacher) {
+        if (teacher.getPwd() != null){
+            String pwd = CommonUtils.MD5(teacher.getPwd());
+            teacher.setPwd(pwd);
+        }
         return teacherMapper.updateById(teacher);
     }
 
     @Override
     public int add(Teacher teacher) {
+        String pwd = CommonUtils.MD5(teacher.getPwd());
+        teacher.setPwd(pwd);
         return teacherMapper.insert(teacher);
     }
 
@@ -46,7 +53,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher checkPwd(int id, String pwd) {
         QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
         teacherQueryWrapper.eq("id",id);
-        teacherQueryWrapper.eq("pwd",pwd);
+        teacherQueryWrapper.eq("pwd",CommonUtils.MD5(pwd));
         return teacherMapper.selectOne(teacherQueryWrapper);
     }
 

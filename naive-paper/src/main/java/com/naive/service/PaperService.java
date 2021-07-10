@@ -18,9 +18,9 @@ public interface PaperService {
 
     int deleteById(int paperId);
 
-    List<Paper> findByCla(String c, int index, int size);
+    Map<String,Object> findByCla(String c, int index, int size);
 
-    List<Paper> findByTea(int tid,int index,int size);
+    Map<String,Object> findByTea(int tid,int index,int size);
 
     int deleteByTea(int tid);
 

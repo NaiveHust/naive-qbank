@@ -48,12 +48,14 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public Map<String,Object> findStu(int cid, int tid) {
+    public Map<String,Object> findStu(int cid, int tid,int index, int size) {
         QueryWrapper<Relation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("cid",cid);
         queryWrapper.eq("tid",tid);
         // find suitable relation
-        List<Relation> relations = relationMapper.selectList(queryWrapper);
+        Page<Relation> page = new Page<>(index,size);
+        IPage<Relation> iPage = relationMapper.selectPage(page,queryWrapper);
+        List<Relation> relations = iPage.getRecords();
         List<Integer> list = new ArrayList<>();
         List<Student> list1;
         Map<String,Object> map;
@@ -80,7 +82,7 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public Map<String,Object> findClaByStu(int sid) {
+    public Map<String,Object> findClaByStu(int sid,int index, int size) {
         QueryWrapper<Relation> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("sid",sid);
         List<Integer> list = new ArrayList<>();
@@ -88,7 +90,9 @@ public class ClassServiceImpl implements ClassService {
         List<Class> list1;
         Map<String,Object> map;
         // find suitable relation
-        List<Relation> relations =  relationMapper.selectList(queryWrapper);
+        Page<Relation> page = new Page<>(index,size);
+        IPage<Relation> iPage = relationMapper.selectPage(page,queryWrapper);
+        List<Relation> relations = iPage.getRecords();
         if (relations.isEmpty()){
             map = new HashMap<>(2);
             map.put("totalCount",0);
@@ -111,13 +115,15 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public Map<String,Object> findClaByTea(int tid) {
+    public Map<String,Object> findClaByTea(int tid,int index, int size) {
         QueryWrapper<Class> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("tid",tid);
         Set<Integer> set = new HashSet<>();
         List<Class> list1;
         Map<String,Object> map;
-        List<Class> classes = classMapper.selectList(queryWrapper);
+        Page<Class> page = new Page<>(index,size);
+        IPage<Class> iPage = classMapper.selectPage(page,queryWrapper);
+        List<Class> classes = iPage.getRecords();
         if(classes.isEmpty()){
             map = new HashMap<>(2);
             map.put("totalCount",0);

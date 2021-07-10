@@ -41,22 +41,29 @@ public class ClassController {
         return classService.addRelation(relation);
     }
 
-    @ApiOperation("查找学生")
-    @GetMapping("findStu/{cid}/{tid}")
-    public Map<String,Object> findStu(@PathVariable("cid") int cid,@PathVariable("tid") int tid){
-        return classService.findStu(cid,tid);
+    @ApiOperation("分页查找学生")
+    @GetMapping("findStu/{cid}/{tid}/{index}/{size}")
+    public Map<String,Object> findStu(@PathVariable("cid") int cid,
+                                      @PathVariable("tid") int tid,
+                                      @PathVariable("index") int index,
+                                      @PathVariable("size") int size){
+        return classService.findStu(cid,tid,index,size);
     }
 
-    @ApiOperation("根据学生查找课程")
-    @GetMapping("findClaByStu/{sid}")
-    public Map<String,Object> findClaByStu(@PathVariable("sid") int sid){
-        return classService.findClaByStu(sid);
+    @ApiOperation("根据学生分页查找课程")
+    @GetMapping("findClaByStu/{sid}/{index}/{size}")
+    public Map<String,Object> findClaByStu(@PathVariable("sid") int sid,
+                                           @PathVariable("index") int index,
+                                           @PathVariable("size") int size){
+        return classService.findClaByStu(sid,index,size);
     }
 
-    @ApiOperation("根据教师查找课程")
-    @GetMapping("findClaByTea/{tid}")
-    public Map<String,Object> findClaByTea(@PathVariable("tid") int tid){
-        return classService.findClaByTea(tid);
+    @ApiOperation("根据教师分页查找课程")
+    @GetMapping("findClaByTea/{tid}/{index}/{size}")
+    public Map<String,Object> findClaByTea(@PathVariable("tid") int tid,
+                                           @PathVariable("index") int index,
+                                           @PathVariable("size") int size){
+        return classService.findClaByTea(tid,index,size);
     }
 
     @ApiOperation("管理员分页查找课程")

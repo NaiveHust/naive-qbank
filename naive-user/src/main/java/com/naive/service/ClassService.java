@@ -17,11 +17,11 @@ public interface ClassService {
 
     int addRelation(Relation relation);
 
-    Map<String,Object> findStu(int cid,int tid);
+    Map<String,Object> findStu(int cid,int tid,int index, int size);
 
-    Map<String,Object> findClaByStu(int sid);
+    Map<String,Object> findClaByStu(int sid,int index, int size);
 
-    Map<String,Object> findClaByTea(int tid);
+    Map<String,Object> findClaByTea(int tid,int index, int size);
 
     Map<String,Object> findByPage(int index, int size);
 }

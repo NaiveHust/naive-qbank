@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.naive.dao.StudentMapper;
 import com.naive.domain.Student;
 import com.naive.service.StudentService;
+import com.naive.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,10 @@ public class StudentServiceImpl implements StudentService {
      * */
     @Override
     public int updateById(Student student) {
+        if (student.getPwd() != null){
+            String pwd = CommonUtils.MD5(student.getPwd());
+            student.setPwd(pwd);
+        }
         return studentMapper.updateById(student);
     }
 
@@ -43,6 +48,8 @@ public class StudentServiceImpl implements StudentService {
      * */
     @Override
     public int add(Student student) {
+        String pwd = CommonUtils.MD5(student.getPwd());
+        student.setPwd(pwd);
         return studentMapper.insert(student);
     }
 
@@ -64,7 +71,7 @@ public class StudentServiceImpl implements StudentService {
     public Student checkPwd(int id, String pwd) {
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.eq("id",id);
-        studentQueryWrapper.eq("pwd",pwd);
+        studentQueryWrapper.eq("pwd",CommonUtils.MD5(pwd));
         return studentMapper.selectOne(studentQueryWrapper);
     }
 

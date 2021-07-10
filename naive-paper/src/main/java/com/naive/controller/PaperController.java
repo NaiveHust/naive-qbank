@@ -82,7 +82,7 @@ public class PaperController {
      */
     @ApiOperation("根据课程分页寻找试卷")
     @GetMapping("findByCla/{paperClass}/{index}/{size}")
-    public List<Paper> findByCla(@PathVariable("paperClass") String paperClass,
+    public Map<String,Object> findByCla(@PathVariable("paperClass") String paperClass,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return paperService.findByCla(paperClass,index,size);
@@ -97,7 +97,7 @@ public class PaperController {
      */
     @ApiOperation("根据教师分页寻找试卷")
     @GetMapping("findByTea/{paperTea}/{index}/{size}")
-    public List<Paper> findByTea(@PathVariable("paperTea") int paperTea,
+    public Map<String,Object> findByTea(@PathVariable("paperTea") int paperTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return paperService.findByTea(paperTea,index,size);
