@@ -58,6 +58,20 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public Map<String,Object> findByDis(String dis,int index, int size) {
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.like("discipline",dis);
+        Page<Teacher> page = new Page<>(index,size);
+        IPage<Teacher> iPage = teacherMapper.selectPage(page,teacherQueryWrapper);
+        Integer count = teacherMapper.selectCount(teacherQueryWrapper);
+        List<Teacher> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
     public Map<String,Object> findByPage(int index, int size) {
         Page<Teacher> page = new Page<>(index,size);
         IPage<Teacher> iPage = teacherMapper.selectPage(page,null);

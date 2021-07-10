@@ -93,6 +93,35 @@ public class StudentController {
 
     /**
      *
+     * @param dis
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("按照专业分页查找学生")
+    @GetMapping("findByDis/{dis}/{index}/{size}")
+    public Map<String,Object> findByDis(@PathVariable("dis") String dis,
+                                        @PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return studentService.findByDis(dis,index,size);
+    }
+
+    /**
+     *
+     * @param gra
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("按照年级分页查找学生")
+    @GetMapping("findByGra/{gra}/{index}/{size}")
+    public Map<String,Object> findByGra(@PathVariable("gra") String gra,
+                                        @PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return studentService.findByGra(gra,index,size);
+    }
+    /**
+     *
      * @param index
      * @param size
      * @return

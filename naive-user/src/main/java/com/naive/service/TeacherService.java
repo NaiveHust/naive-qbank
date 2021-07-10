@@ -20,5 +20,7 @@ public interface TeacherService {
 
     Teacher checkPwd(int id, String pwd);
 
+    Map<String,Object> findByDis(String dis,int index, int size);
+
     Map<String,Object> findByPage(int index, int size);
 }

@@ -20,5 +20,9 @@ public interface StudentService {
 
     Student checkPwd(int id,String pwd);
 
+    Map<String,Object> findByDis(String dis,int index, int size);
+
+    Map<String,Object> findByGra(String gra,int index, int size);
+
     Map<String,Object> findByPage(int index, int size);
 }

@@ -76,6 +76,34 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Map<String,Object> findByDis(String dis,int index, int size) {
+        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.like("discipline",dis);
+        Page<Student> page = new Page<>(index,size);
+        IPage<Student> iPage = studentMapper.selectPage(page,studentQueryWrapper);
+        Integer count = studentMapper.selectCount(studentQueryWrapper);
+        List<Student> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByGra(String gra,int index, int size) {
+        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.like("grade",gra);
+        Page<Student> page = new Page<>(index,size);
+        IPage<Student> iPage = studentMapper.selectPage(page,studentQueryWrapper);
+        Integer count = studentMapper.selectCount(studentQueryWrapper);
+        List<Student> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
     public Map<String,Object> findByPage(int index, int size) {
         Page<Student> page = new Page<>(index,size);
         IPage<Student> iPage = studentMapper.selectPage(page,null);

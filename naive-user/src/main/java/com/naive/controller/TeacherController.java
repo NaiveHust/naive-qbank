@@ -93,6 +93,20 @@ public class TeacherController {
         return teacherService.checkPwd(id,pwd);
     }
 
+    /**
+     *
+     * @param dis
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("根据专业分页查找教师")
+    @GetMapping("findByDis/{dis}/{index}/{size}")
+    public Map<String,Object> findByDis(@PathVariable("dis") String dis,
+                                        @PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return teacherService.findByDis(dis,index,size);
+    }
 
     /**
      *
