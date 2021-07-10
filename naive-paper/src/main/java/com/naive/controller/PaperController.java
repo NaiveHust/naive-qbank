@@ -73,6 +73,16 @@ public class PaperController {
         return paperService.deleteById(paperId);
     }
 
+
+    @ApiOperation("根据课程教师分页寻找试卷")
+    @GetMapping("findByClaAndTea/{paperClass}/{paperTea}/{index}/{size}")
+    public Map<String,Object> findByClaAndTea(@PathVariable("paperClass") String paperClass,
+                                              @PathVariable("paperTea") int paperTea,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return paperService.findByClaAndTea(paperClass,paperTea,index,size);
+    }
+
     /**
      *
      * @param paperClass

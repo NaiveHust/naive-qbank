@@ -72,6 +72,21 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Map<String,Object> findByClaAndTea(String c,int tid, int index, int size) {
+        QueryWrapper<Paper> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("paper_class",c);
+        queryWrapper.eq("paper_tea",tid);
+        Page<Paper> page = new Page<>(index,size);
+        IPage<Paper> iPage = paperMapper.selectPage(page,queryWrapper);
+        Integer count = paperMapper.selectCount(queryWrapper);
+        List<Paper> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
     public int deleteByTea(int tid) {
         QueryWrapper<Paper> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("paper_tea",tid);

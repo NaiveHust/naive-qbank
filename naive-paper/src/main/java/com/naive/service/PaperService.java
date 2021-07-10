@@ -22,6 +22,8 @@ public interface PaperService {
 
     Map<String,Object> findByTea(int tid,int index,int size);
 
+    Map<String,Object> findByClaAndTea(String c,int tid, int index, int size);
+
     int deleteByTea(int tid);
 
     Map<String,Object> findByPage(int index, int size);
