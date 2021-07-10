@@ -24,6 +24,10 @@ public interface QuestionService {
 
     Map<String,Object> findByCla(String c,int tid,int index,int size);
 
+    Map<String,Object> findByDifAdmin(String difficulty,int index,int size);
+
+    Map<String,Object> findByClaAdmin(String c,int index,int size);
+
     Map<String,Object> findByTea(int tid, int index, int size);
 
     int deleteByTea(int teaId);

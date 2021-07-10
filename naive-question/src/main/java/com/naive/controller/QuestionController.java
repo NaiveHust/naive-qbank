@@ -110,6 +110,36 @@ public class QuestionController {
 
     /**
      *
+     * @param difficulty
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据难度分页寻找试题")
+    @GetMapping("findByDifAdmin/{difficulty}/{index}/{size}")
+    public Map<String,Object> findByDifAdmin(@PathVariable("difficulty") String difficulty,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByDifAdmin(difficulty,index,size);
+    }
+
+    /**
+     *
+     * @param proClass
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据课程分页寻找试题")
+    @GetMapping("findByClaAdmin/{proClass}/{index}/{size}")
+    public Map<String,Object> findByClaAdmin(@PathVariable("proClass") String proClass,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByClaAdmin(proClass,index,size);
+    }
+
+    /**
+     *
      * @param proTea
      * @param index
      * @param size
