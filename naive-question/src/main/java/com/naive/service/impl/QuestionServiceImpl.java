@@ -88,6 +88,21 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Map<String,Object> findByType(String type,int tid, int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("pro_type",type);
+        queryWrapper.eq("pro_tea",tid);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
     public Map<String,Object> findByDifAdmin(String difficulty,int index,int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("pro_dif",difficulty);
@@ -105,6 +120,20 @@ public class QuestionServiceImpl implements QuestionService {
     public Map<String,Object> findByClaAdmin(String c,int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("pro_class",c);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByTypeAdmin(String type,int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("pro_type",type);
         Page<Problem> page = new Page<>(index,size);
         IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
         Integer count = questionMapper.selectCount(queryWrapper);

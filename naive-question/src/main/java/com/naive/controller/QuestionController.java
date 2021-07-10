@@ -110,6 +110,23 @@ public class QuestionController {
 
     /**
      *
+     * @param proType
+     * @param proTea
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("教师根据类型分页寻找试题")
+    @GetMapping("findByCla/{proType}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByType(@PathVariable("proType") String proType,
+                                        @PathVariable("proTea") int proTea,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByCla(proType,proTea,index,size);
+    }
+
+    /**
+     *
      * @param difficulty
      * @param index
      * @param size
@@ -136,6 +153,21 @@ public class QuestionController {
                                         @PathVariable("index") int index,
                                         @PathVariable("size") int size){
         return questionService.findByClaAdmin(proClass,index,size);
+    }
+
+    /**
+     * 
+     * @param proType
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据类型分页寻找试题")
+    @GetMapping("findByClaAdmin/{proType}/{index}/{size}")
+    public Map<String,Object> findByTypeAdmin(@PathVariable("proType") String proType,
+                                             @PathVariable("index") int index,
+                                             @PathVariable("size") int size){
+        return questionService.findByClaAdmin(proType,index,size);
     }
 
     /**
