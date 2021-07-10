@@ -117,12 +117,12 @@ public class QuestionController {
      * @return
      */
     @ApiOperation("教师根据类型分页寻找试题")
-    @GetMapping("findByCla/{proType}/{proTea}/{index}/{size}")
+    @GetMapping("findByType/{proType}/{proTea}/{index}/{size}")
     public Map<String,Object> findByType(@PathVariable("proType") String proType,
                                         @PathVariable("proTea") int proTea,
                                         @PathVariable("index") int index,
                                         @PathVariable("size") int size){
-        return questionService.findByCla(proType,proTea,index,size);
+        return questionService.findByType(proType,proTea,index,size);
     }
 
     /**
@@ -156,18 +156,18 @@ public class QuestionController {
     }
 
     /**
-     * 
+     *
      * @param proType
      * @param index
      * @param size
      * @return
      */
     @ApiOperation("管理员根据类型分页寻找试题")
-    @GetMapping("findByClaAdmin/{proType}/{index}/{size}")
+    @GetMapping("findByTypeAdmin/{proType}/{index}/{size}")
     public Map<String,Object> findByTypeAdmin(@PathVariable("proType") String proType,
                                              @PathVariable("index") int index,
                                              @PathVariable("size") int size){
-        return questionService.findByClaAdmin(proType,index,size);
+        return questionService.findByTypeAdmin(proType,index,size);
     }
 
     /**
