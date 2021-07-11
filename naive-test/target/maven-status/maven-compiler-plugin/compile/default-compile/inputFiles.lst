@@ -1,0 +1,10 @@
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/TestApplication.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/controller/TestController.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/dao/TestMapper.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/listener/StuListener.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/service/TestService.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/service/impl/TestServiceImpl.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/listener/PaperListener.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/config/MybatisPlusConfig.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/config/PaperMQConfig.java
+/Users/apple/Desktop/程序用文件夹/naive-qbank/naive-test/src/main/java/com/naive/config/StuMQConfig.java

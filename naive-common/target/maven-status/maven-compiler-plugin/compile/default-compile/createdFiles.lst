@@ -1,0 +1,9 @@
+com/naive/domain/Student.class
+com/naive/domain/Teacher.class
+com/naive/domain/Paper.class
+com/naive/domain/Relation.class
+com/naive/domain/Test.class
+com/naive/domain/Problem.class
+com/naive/domain/User.class
+com/naive/domain/Class.class
+com/naive/domain/Admin.class
