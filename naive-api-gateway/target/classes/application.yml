@@ -23,39 +23,39 @@ spring:
         server-addr: 123.57.215.118:8848
 
     gateway:
-      routes: #数组形式
-        - id: naive-user  #路由唯一标识
-          uri: lb://naive-user  # 从nacos获取名称转发,lb是负载均衡轮询策略
-          order: 1 #优先级，数字越小优先级越高
-          predicates: #断言 配置哪个路径才转发
+      routes:
+        - id: naive-user
+          uri: lb://naive-user
+          order: 1
+          predicates:
             - Path=/naive-user/**
-          filters: #过滤器，请求在传递过程中通过过滤器修改
-            - StripPrefix=1  #去掉第一层前缀
+          filters:
+            - StripPrefix=1
 
-        - id: naive-question  #路由唯一标识
-          uri: lb://naive-question  # 从nacos获取名称转发,lb是负载均衡轮询策略
-          order: 1 #优先级，数字越小优先级越高
-          predicates: #断言 配置哪个路径才转发
+        - id: naive-question
+          uri: lb://naive-question
+          order: 1
+          predicates:
             - Path=/naive-question/**
-          filters: #过滤器，请求在传递过程中通过过滤器修改
-            - StripPrefix=1  #去掉第一层前缀
+          filters:
+            - StripPrefix=1
 
-        - id: naive-paper  #路由唯一标识
-          uri: lb://naive-paper  # 从nacos获取名称转发,lb是负载均衡轮询策略
-          order: 1 #优先级，数字越小优先级越高
-          predicates: #断言 配置哪个路径才转发
+        - id: naive-paper
+          uri: lb://naive-paper
+          order: 1
+          predicates:
               - Path=/naive-paper/**
-          filters: #过滤器，请求在传递过程中通过过滤器修改
-              - StripPrefix=1  #去掉第一层前缀
+          filters:
+              - StripPrefix=1
 
-        - id: naive-test  #路由唯一标识
-          uri: lb://naive-test  # 从nacos获取名称转发,lb是负载均衡轮询策略
-          order: 1 #优先级，数字越小优先级越高
-          predicates: #断言 配置哪个路径才转发
+        - id: naive-test
+          uri: lb://naive-test
+          order: 1
+          predicates:
               - Path=/naive-test/**
-          filters: #过滤器，请求在传递过程中通过过滤器修改
+          filters:
               - StripPrefix=1
 
       discovery:
         locator:
-          enabled: true  #开启网关拉取nacos的服务
+          enabled: true
