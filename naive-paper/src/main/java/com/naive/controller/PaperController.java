@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -72,6 +73,16 @@ public class PaperController {
         return paperService.deleteById(paperId);
     }
 
+
+    @ApiOperation("根据课程教师分页寻找试卷")
+    @GetMapping("findByClaAndTea/{paperClass}/{paperTea}/{index}/{size}")
+    public Map<String,Object> findByClaAndTea(@PathVariable("paperClass") String paperClass,
+                                              @PathVariable("paperTea") int paperTea,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return paperService.findByClaAndTea(paperClass,paperTea,index,size);
+    }
+
     /**
      *
      * @param paperClass
@@ -81,7 +92,7 @@ public class PaperController {
      */
     @ApiOperation("根据课程分页寻找试卷")
     @GetMapping("findByCla/{paperClass}/{index}/{size}")
-    public List<Paper> findByCla(@PathVariable("paperClass") String paperClass,
+    public Map<String,Object> findByCla(@PathVariable("paperClass") String paperClass,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return paperService.findByCla(paperClass,index,size);
@@ -96,10 +107,22 @@ public class PaperController {
      */
     @ApiOperation("根据教师分页寻找试卷")
     @GetMapping("findByTea/{paperTea}/{index}/{size}")
-    public List<Paper> findByTea(@PathVariable("paperTea") int paperTea,
+    public Map<String,Object> findByTea(@PathVariable("paperTea") int paperTea,
                                    @PathVariable("index") int index,
                                    @PathVariable("size") int size){
         return paperService.findByTea(paperTea,index,size);
     }
 
+    /**
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员分页查找试卷")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return paperService.findByPage(index,size);
+    }
 }

@@ -4,6 +4,7 @@ import com.naive.domain.Class;
 import com.naive.domain.Relation;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -16,7 +17,11 @@ public interface ClassService {
 
     int addRelation(Relation relation);
 
-    List<Integer> findStu(int cid,int tid);
+    Map<String,Object> findStu(int cid,int tid,int index, int size);
 
-    List<Relation> findClass(int sid);
+    Map<String,Object> findClaByStu(int sid,int index, int size);
+
+    Map<String,Object> findClaByTea(int tid,int index, int size);
+
+    Map<String,Object> findByPage(int index, int size);
 }

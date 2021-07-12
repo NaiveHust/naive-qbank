@@ -1,6 +1,5 @@
 package com.naive.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -89,6 +88,63 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Map<String,Object> findByType(String type,int tid, int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("pro_type",type);
+        queryWrapper.eq("pro_tea",tid);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByDifAdmin(String difficulty,int index,int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("pro_dif",difficulty);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByClaAdmin(String c,int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("pro_class",c);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> findByTypeAdmin(String type,int index, int size) {
+        QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("pro_type",type);
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,queryWrapper);
+        Integer count = questionMapper.selectCount(queryWrapper);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
+    }
+
+    @Override
     public Map<String,Object> findByTea(int tid, int index, int size) {
         QueryWrapper<Problem> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("pro_tea",tid);
@@ -108,5 +164,17 @@ public class QuestionServiceImpl implements QuestionService {
         queryWrapper.eq("pro_tea",teaId);
         questionMapper.delete(queryWrapper);
         return 0;
+    }
+
+    @Override
+    public Map<String,Object> findByPage(int index, int size) {
+        Page<Problem> page = new Page<>(index,size);
+        IPage<Problem> iPage = questionMapper.selectPage(page,null);
+        Integer count = questionMapper.selectCount(null);
+        List<Problem> list = iPage.getRecords();
+        Map<String,Object> map = new HashMap<>(2);
+        map.put("totalCount",count);
+        map.put("list",list);
+        return map;
     }
 }

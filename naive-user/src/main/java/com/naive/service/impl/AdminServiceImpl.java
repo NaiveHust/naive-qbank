@@ -5,6 +5,7 @@ import com.naive.dao.AdminMapper;
 import com.naive.domain.Admin;
 import com.naive.domain.Student;
 import com.naive.service.AdminService;
+import com.naive.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,17 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updateById(Admin admin) {
+        if (admin.getPwd() != null){
+            String pwd = CommonUtils.MD5(admin.getPwd());
+            admin.setPwd(pwd);
+        }
         return adminMapper.updateById(admin);
     }
 
     @Override
     public int add(Admin admin) {
+        String pwd = CommonUtils.MD5(admin.getPwd());
+        admin.setPwd(pwd);
         return adminMapper.insert(admin);
     }
 
@@ -41,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin checkPwd(int id, String pwd) {
         QueryWrapper<Admin> adminQueryWrapper = new QueryWrapper<>();
         adminQueryWrapper.eq("id",id);
-        adminQueryWrapper.eq("pwd",pwd);
+        adminQueryWrapper.eq("pwd",CommonUtils.MD5(pwd));
         return adminMapper.selectOne(adminQueryWrapper);
     }
 }

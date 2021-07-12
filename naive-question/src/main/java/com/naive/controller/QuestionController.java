@@ -110,6 +110,68 @@ public class QuestionController {
 
     /**
      *
+     * @param proType
+     * @param proTea
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("教师根据类型分页寻找试题")
+    @GetMapping("findByType/{proType}/{proTea}/{index}/{size}")
+    public Map<String,Object> findByType(@PathVariable("proType") String proType,
+                                        @PathVariable("proTea") int proTea,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByType(proType,proTea,index,size);
+    }
+
+    /**
+     *
+     * @param difficulty
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据难度分页寻找试题")
+    @GetMapping("findByDifAdmin/{difficulty}/{index}/{size}")
+    public Map<String,Object> findByDifAdmin(@PathVariable("difficulty") String difficulty,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByDifAdmin(difficulty,index,size);
+    }
+
+    /**
+     *
+     * @param proClass
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据课程分页寻找试题")
+    @GetMapping("findByClaAdmin/{proClass}/{index}/{size}")
+    public Map<String,Object> findByClaAdmin(@PathVariable("proClass") String proClass,
+                                        @PathVariable("index") int index,
+                                        @PathVariable("size") int size){
+        return questionService.findByClaAdmin(proClass,index,size);
+    }
+
+    /**
+     *
+     * @param proType
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员根据类型分页寻找试题")
+    @GetMapping("findByTypeAdmin/{proType}/{index}/{size}")
+    public Map<String,Object> findByTypeAdmin(@PathVariable("proType") String proType,
+                                             @PathVariable("index") int index,
+                                             @PathVariable("size") int size){
+        return questionService.findByTypeAdmin(proType,index,size);
+    }
+
+    /**
+     *
      * @param proTea
      * @param index
      * @param size
@@ -121,5 +183,18 @@ public class QuestionController {
                                                 @PathVariable("index") int index,
                                                 @PathVariable("size") int size){
         return questionService.findByTea(proTea,index,size);
+    }
+
+    /**
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    @ApiOperation("管理员分页查找试题")
+    @GetMapping("findByPage/{index}/{size}")
+    public Map<String,Object> findByPage(@PathVariable("index") int index,
+                                         @PathVariable("size") int size){
+        return questionService.findByPage(index,size);
     }
 }

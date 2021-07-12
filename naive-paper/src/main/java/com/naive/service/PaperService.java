@@ -3,6 +3,7 @@ package com.naive.service;
 import com.naive.domain.Paper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YechenGu
@@ -17,9 +18,13 @@ public interface PaperService {
 
     int deleteById(int paperId);
 
-    List<Paper> findByCla(String c, int index, int size);
+    Map<String,Object> findByCla(String c, int index, int size);
 
-    List<Paper> findByTea(int tid,int index,int size);
+    Map<String,Object> findByTea(int tid,int index,int size);
+
+    Map<String,Object> findByClaAndTea(String c,int tid, int index, int size);
 
     int deleteByTea(int tid);
+
+    Map<String,Object> findByPage(int index, int size);
 }
